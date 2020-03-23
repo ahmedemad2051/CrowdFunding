@@ -37,21 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites' # for facebook authentication using allauth lib
     'authenticate',
     'users',
     'projects',
     'main',
 
+    #DigitalOcean Test
+    'social_django',
 
-    # all auth specific
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-
-    # all auth providers
-    'allauth.socialaccount.providers.facebook',
-    'allauth.socialaccount.providers.google'
 
 ]
 
@@ -116,6 +109,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.linkedin.LinkedinOAuth2',
+    'social_core.backends.instagram.InstagramOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -136,7 +136,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-SITE_ID = 1
+SOCIAL_AUTH_FACEBOOK_KEY = 2530194673934561        # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '7f1db6b34f18d373d90832aef88912c4' # App Secret
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
