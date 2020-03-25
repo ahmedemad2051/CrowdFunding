@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="item-content-block extra_tags">
                                     {% for tag in project.tags.all %}
-                                    <a href="#">{{ tag }}</a>
+                                        <a href="#">{{ tag }}</a>
                                     {% endfor %}
                                 </div>
                             </div>
@@ -121,6 +121,40 @@
             </div>
         </div>
     </div>
+
+    <!-- similar projects  -->
+    {% if similar_projects %}
+        <div class="reson_area section_padding">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="section_title text-center mb-55">
+                            <h3><span>Similar Projects</span></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    {% for proj in similar_projects %}
+                        <div class="col-lg-4 col-md-6">
+                            <div class="single_reson">
+                                <div class="thum">
+                                    <div class="thum_1">
+                                        <img src="/media/{{ proj.images.first }}" width="266px" height="388px" alt="">
+                                    </div>
+                                </div>
+                                <div class="help_content similar_content">
+                                    <h4>{{ proj.title }}</h4>
+                                    <p>{{  proj.desc|truncatewords:20 }}</p>
+                                    <a href="{% url "projects.show" proj.slug %}" class="read_more">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <!-- similar projects end  -->
 
 
 {% endblock %}

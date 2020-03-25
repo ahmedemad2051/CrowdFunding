@@ -20,7 +20,9 @@ def index(req):
 def show(req, project_slug):
     context = {}
     project = Project.objects.get(slug=project_slug)
+    similar_projects = Project.objects.filter(tags__in=project.tags.all()).exclude(id=project.id)
     context['project'] = project
+    context['similar_projects'] = similar_projects
     return render(req, "projects/show.html", context)
 
 
