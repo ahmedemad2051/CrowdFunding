@@ -34,9 +34,9 @@ def create(req):
         formset = ImageFormSet(req.POST, req.FILES,
                                queryset=Image.objects.none())
         if projectForm.is_valid() and formset.is_valid():
-            project_form = projectForm.save(commit=False)
+            project_form = projectForm.save(commit=True)
             # project_form.user = req.user
-            project_form.save()
+            # project_form.save()
             for image in req.FILES.getlist('form-0-image'):
                 # for img in image_list:
                 photo = Image(project=project_form, image=image)

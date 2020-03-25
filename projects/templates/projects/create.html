@@ -5,6 +5,7 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css"/>
     <link href="/static/layout/css/select2.min.css" rel="stylesheet"/>
+    <link href="/static/projects/css/bootstrap-tagsinput.css" rel="stylesheet"/>
 
 {% endblock %}
 
@@ -13,6 +14,7 @@
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
     <script src="/static/layout/js/select2.min.js"></script>
+    <script src="/static/projects/js/bootstrap-tagsinput.min.js"></script>
     <script>
         $(function () {
             // Multiple images preview in browser
@@ -81,8 +83,12 @@
                                 </div>
                             </div>
                             <div class="col-6">
+{#                                <div class="form-group">#}
+{#                                    {{ form.tags|as_crispy_field }}#}
+{#                                </div>#}
                                 <div class="form-group">
-                                    {{ form.tags|as_crispy_field }}
+                                    <label>Tags</label>
+                                    <input type="text" data-role="tagsinput" class="form-control" name="tags">
                                 </div>
                             </div>
                             <div class="col-12">

@@ -1,10 +1,9 @@
 from django import forms
-from projects.models import Project, Image, Tag
+from projects.models import Project, Image
 from tempus_dominus.widgets import DatePicker, TimePicker, DateTimePicker
 
 
 class ProjectForm(forms.ModelForm):
-    tags = forms.ModelMultipleChoiceField(queryset=Tag.objects.all(), required=False)
 
     class Meta:
         model = Project

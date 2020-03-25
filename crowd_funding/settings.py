@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'main',
     'tempus_dominus',
     'crispy_forms',
-    'projects.templatetags'
+    'projects.templatetags',
+    'taggit'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -90,7 +91,7 @@ WSGI_APPLICATION = 'crowd_funding.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'crowd_funding',
+        'NAME': 'crowd_funding_tags',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': '127.0.0.1',
