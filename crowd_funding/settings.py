@@ -42,8 +42,7 @@ INSTALLED_APPS = [
     'tempus_dominus',
     'crispy_forms',
     'projects.templatetags',
-    'taggit'
-
+    'taggit',
     #DigitalOcean Test
     'social_django',
 
@@ -97,8 +96,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'crowd_funding_tags',
-        'USER': 'root',
-        'PASSWORD': 'root',
+        'USER': 'jaxon',
+        'PASSWORD': 'django',
         'HOST': '127.0.0.1',
         'PORT': '3306'
     }
@@ -151,3 +150,7 @@ STATICFILES_DIRS = [
 # PROJECT_PATH = os.path.abspath(os.path.dirname(__name__))
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+#Authentication redirection
+LOGIN_REDIRECT_URL = "/home"
+LOGOUT_REDIRECT_URL = "/home"
