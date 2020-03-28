@@ -76,7 +76,7 @@ TEMPLATES = [
     },
 ]
 
-AUTH_USER_MODEL = 'authenticate.Account'
+AUTH_USER_MODEL = 'users.Account'
 
 WSGI_APPLICATION = 'crowd_funding.wsgi.application'
 
