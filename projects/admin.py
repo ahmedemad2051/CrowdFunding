@@ -1,5 +1,5 @@
 from django.contrib import admin
-from projects.models import Category, Project, Image, Tag
+from projects.models import Category, Project, Image
 
 
 # Register your models here.
@@ -16,4 +16,3 @@ class PropertyAdmin(admin.ModelAdmin):
 
 admin.site.register(Project, PropertyAdmin)
 admin.site.register(Category)
-admin.site.register(Tag)

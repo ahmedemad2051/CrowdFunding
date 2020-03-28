@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'main',
     'tempus_dominus',
     'crispy_forms',
+    'projects.templatetags',
+    'taggit'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -137,3 +139,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 
 ]
+
+# PROJECT_PATH = os.path.abspath(os.path.dirname(__name__))
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
