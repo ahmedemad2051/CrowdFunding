@@ -76,6 +76,8 @@ TEMPLATES = [
     },
 ]
 
+AUTH_USER_MODEL = 'authenticate.Account'
+
 WSGI_APPLICATION = 'crowd_funding.wsgi.application'
 
 # Database
