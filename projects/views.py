@@ -25,28 +25,28 @@ def show(req, project_slug):
     context['similar_projects'] = similar_projects
     return render(req, "projects/show.html", context)
 
+
 @login_required
 def create(req):
-
     context = {}
     ImageFormSet = modelformset_factory(Image, form=ImageForm, extra=1)
     if req.method == "POST":
-        # return HttpResponse(req.POST.getlist('tags'))
         projectForm = ProjectForm(req.POST)
         formset = ImageFormSet(req.POST, req.FILES,
                                queryset=Image.objects.none())
         if projectForm.is_valid() and formset.is_valid():
-            project_form = projectForm.save(commit=True)
-            # project_form.user = req.user
-            # project_form.save()
+            project = projectForm.save(commit=False)
+            project.owner = req.user
+            project.save()
+            projectForm.save_m2m()
             for image in req.FILES.getlist('form-0-image'):
                 # for img in image_list:
-                photo = Image(project=project_form, image=image)
+                photo = Image(project=project, image=image)
                 photo.save()
 
             messages.success(req,
                              "Campaign Created Successfully!")
-            return HttpResponseRedirect("/home")
+            return HttpResponseRedirect("/")
     else:
         projectForm = ProjectForm()
         formset = ImageFormSet(queryset=Image.objects.none())

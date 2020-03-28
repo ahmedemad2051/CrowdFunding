@@ -34,7 +34,6 @@ class CFAccountManager(BaseUserManager):
 
 
 class Account(AbstractBaseUser):
-
     # FIELDS REQUIRED BY DJANGO
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
     username = models.CharField(max_length=30, unique=True)
@@ -51,7 +50,6 @@ class Account(AbstractBaseUser):
     mobile = models.CharField(max_length=20)
     profile_picture = models.ImageField()
 
-
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
@@ -65,5 +63,3 @@ class Account(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
-
-

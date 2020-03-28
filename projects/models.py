@@ -1,6 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from taggit.managers import TaggableManager
+from users.models import Account
 
 
 # Create your models here.
@@ -9,6 +10,7 @@ class Project(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True, null=True)
     desc = models.TextField(max_length=1500)
+    owner = models.ForeignKey(to="users.Account", on_delete=models.CASCADE)
     category = models.ForeignKey(to="Category", on_delete=models.CASCADE)
     tags = TaggableManager()
     total = models.DecimalField(decimal_places=2, max_digits=10)
