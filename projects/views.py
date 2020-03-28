@@ -25,7 +25,7 @@ def show(req, project_slug):
     context['similar_projects'] = similar_projects
     return render(req, "projects/show.html", context)
 
-
+@login_required
 def create(req):
 
     context = {}

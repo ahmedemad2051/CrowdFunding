@@ -80,7 +80,7 @@ TEMPLATES = [
     },
 ]
 
-AUTH_USER_MODEL = 'authenticate.Account'
+AUTH_USER_MODEL = 'users.Account'
 
 WSGI_APPLICATION = 'crowd_funding.wsgi.application'
 
@@ -154,5 +154,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 #Authentication redirection
-LOGIN_REDIRECT_URL = "/home"
-LOGOUT_REDIRECT_URL = "/home"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
