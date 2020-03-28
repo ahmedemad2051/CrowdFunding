@@ -1476,9 +1476,9 @@ h3 {
 .slider_bg_1 {
   background-image: url(../img/banner/banner.png);
 }
-.img_size{
-  height: 500px;
-}
+/*.img_size{*/
+/*  height: 500px;*/
+/*}*/
 
 /* line 4, ../../Arafath/CL/january 2020/242. charity/HTML/scss/_slider.scss */
 .slider_bg_2 {
