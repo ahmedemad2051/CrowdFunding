@@ -1,5 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
+from taggit.managers import TaggableManager
 
 
 # Create your models here.
@@ -7,9 +8,9 @@ from django.template.defaultfilters import slugify
 class Project(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True, null=True)
-    desc = models.TextField()
+    desc = models.TextField(max_length=1500)
     category = models.ForeignKey(to="Category", on_delete=models.CASCADE)
-    tags = models.ManyToManyField(to="Tag")
+    tags = TaggableManager()
     total = models.DecimalField(decimal_places=2, max_digits=10)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
@@ -37,10 +38,14 @@ class Image(models.Model):
     image = models.ImageField(upload_to=get_image_filename, verbose_name='Image')
     created_at = models.DateTimeField(auto_now_add=True, null=True)
 
+    def __str__(self):
+        return self.image.__str__()
 
-class Tag(models.Model):
-    name = models.CharField(db_index=True, unique=True, max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True, null=True)
+
+class Donation(models.Model):
+    project = models.ForeignKey(Project, related_name='donations', on_delete=models.CASCADE)
+    amount = models.DecimalField(decimal_places=2, max_digits=10)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return f"{self.project} - {self.amount}"
