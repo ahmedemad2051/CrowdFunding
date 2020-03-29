@@ -4,6 +4,7 @@ register = template.Library()
 
 
 @register.filter(name='total_amount')
+@register.simple_tag
 def total_amount(donations):
     all = 0
     for donate in donations:
@@ -13,4 +14,4 @@ def total_amount(donations):
 
 @register.filter(name='total_amount_percent')
 def total_amount(donations, target):
-    return (donations * 100) / target
+    return int((donations * 100) / target)

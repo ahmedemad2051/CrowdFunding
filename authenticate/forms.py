@@ -21,3 +21,4 @@ class UserRegisterationForm(UserCreationForm):
             'last_name': 'Last Name',
             'profile_picture': 'Profile Picture'
         }
+

@@ -20,10 +20,10 @@
                             <div class="causes_content">
                                 <div class="custom_progress_bar">
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: {{ project.donations.all | total_amount |total_amount_percent:project.total }}%%;"
+                                        <div class="progress-bar" role="progressbar" style="width: {{ project.donations.all | total_amount |total_amount_percent:project.total }}%;"
                                              aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
                                         <span class="progres_count">
-                                            {{ project.donations.all | total_amount |total_amount_percent:project.total }}%%
+                                            {{ project.donations.all | total_amount |total_amount_percent:project.total }}%
                                         </span>
                                         </div>
                                     </div>
