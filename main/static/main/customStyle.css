@@ -1,6 +1,9 @@
 .img_size{
   height: 500px;
 }
+.popular{
+	width: 40%;
+}
 
 
 /*icon slider*/
@@ -76,15 +79,15 @@ h2::after {
 	padding: 15px;
 }
 .carousel .carousel-control {
-	height: 100px;
+	height: 50px;
     width: 40px;
     background: none;
     margin: auto 0;
-    background: rgba(0, 0, 0, 0.2);
+    background: #999;
 }
 .carousel .carousel-control i {
-    font-size: 30px;
-    position: absolute;
+   font-size: 30px;
+   position: absolute;
     top: 50%;
     display: inline-block;
     margin: -16px 0 0 0;
@@ -93,7 +96,7 @@ h2::after {
     right: 0;
     color: rgba(0, 0, 0, 0.8);
     text-shadow: none;
-    font-weight: bold;
+   font-weight: bold;
 }
 .carousel .item-price {
 	font-size: 13px;

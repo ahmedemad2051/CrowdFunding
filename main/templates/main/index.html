@@ -1,4 +1,4 @@
-{% extends "layout/base.html" %}
+ {% extends "layout/base.html" %}
 {% block styles %}
     <link rel="stylesheet" href="/static/main/customStyle.css">
     <script src="/static/main/javascript/customJS.js"></script>
@@ -220,20 +220,22 @@
                                         </div>
                                     </div>
                                 </div>
+                                {% for p in context.selectedProjects %}
+
+ 
                                 <div class="balance d-flex justify-content-between align-items-center">
                                     <span>Raised: $5000.00 </span>
                                     <span>Goal: $9000.00 </span>
                                 </div>
-                                <h4>Help us to Send Food</h4>
-                                <p>The passage is attributed to an
-                                    unknown typesetter in the century
-                                    who is thought</p>
+                                <h4>{{ p.title }}</h4>
+                                <p class="popular">{{ p.desc}}</p>
                                 <a class="read_more" href="cause_details.html">Read More</a>
                             </div>
                         </div>
                         <div class="single_cause">
                             <div class="thumb">
-                                <img src="/static/layout/img/causes/2.png" alt="">
+                                <img src="/static/layout/img/causes/3.png" alt="">
+                                
                             </div>
                             <div class="causes_content">
                                 <div class="custom_progress_bar">
@@ -246,6 +248,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                {% endfor %} 
                                 <div class="balance d-flex justify-content-between align-items-center">
                                     <span>Raised: $5000.00 </span>
                                     <span>Goal: $9000.00 </span>
@@ -998,4 +1001,9 @@
     </div>
 
 
-{% endblock %}
+{% endblock %}  
+
+
+{% for p in context.selectedProjects %}
+<h1>{{ p.slug }}</h1>
+ {% endfor %} 
