@@ -82,6 +82,12 @@ TEMPLATES = [
 
 AUTH_USER_MODEL = 'users.Account'
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'crowdfunditi@gmail.com'
+EMAIL_HOST_PASSWORD = 'Testing1234'
+EMAIL_PORT = 587
+
 WSGI_APPLICATION = 'crowd_funding.wsgi.application'
 
 # Database
