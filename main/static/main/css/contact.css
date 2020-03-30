@@ -4,4 +4,14 @@ font-family: 'Open Sans', sans-serif;
 
 h1{
 font-family: 'Baloo Thambi 2', cursive;
+color: #14565E;
+}
+
+.send_message_button{
+    background-color: #14C087;
+
+}
+
+.send_message_button:hover{
+    background-color: #004F4A;
 }
