@@ -1,0 +1,89 @@
+{% extends "layout/base.html" %}
+{% load crispy_forms_tags %}
+{% block styles %}
+    <link rel="stylesheet" href="/static/authenticate/css/login.css">
+{% endblock %}
+
+
+
+{% block bradcam_text %}
+    Login
+{% endblock %}
+{% block content %}
+
+    {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+                please login with an account that has access.</p>
+        {% else %}
+            <p>Please login to see this page.</p>
+        {% endif %}
+    {% endif %}
+
+    <div class=" pt-120 cause_details ">
+        <div class="container">
+            <div class="row">
+                <div class="limiter">
+                    <div class="container-login100">
+                        <div class="wrap-login100">
+                            <div class="login100-pic js-tilt" data-tilt>
+                                <img src="https://colorlib.com/etc/lf/Login_v1/images/img-01.png" alt="IMG">
+                            </div>
+
+                            <form method="post" class="login100-form validate-form">
+                                {% csrf_token %}
+                                <span class="login100-form-title">
+						Member Login
+					</span>
+                                <input type="hidden" name="next" value="{{ next }}">
+                                <div class="wrap-input100 validate-input"
+                                     data-validate="Valid email is required: ex@abc.xyz">
+                                    <input class="input100" type="text" name="username" placeholder="Email">
+                                    <span class="focus-input100"></span>
+                                    <span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+                                </div>
+
+                                <div class="wrap-input100 validate-input" data-validate="Password is required">
+                                    <input class="input100" type="password" name="password" placeholder="Password">
+                                    <span class="focus-input100"></span>
+                                    <span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+                                </div>
+
+                                <div class="container-login100-form-btn">
+                                    <button class="login100-form-btn" type="submit">
+                                        Login
+                                    </button>
+                                </div>
+
+                                <div class="text-center p-t-12">
+						<span class="txt1">
+							Forgot
+						</span>
+                                    <a class="txt2" href="{% url 'password_reset' %}">
+                                        Username / Password?
+                                    </a>
+                                </div>
+
+                                <div class="text-center p-t-136">
+                                    <a class="txt2" href="#">
+                                        Create your Account
+                                        <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

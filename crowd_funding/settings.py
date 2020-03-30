@@ -41,6 +41,12 @@ INSTALLED_APPS = [
     'main',
     'tempus_dominus',
     'crispy_forms',
+    'projects.templatetags',
+    'taggit',
+    #DigitalOcean Test
+    'social_django',
+
+
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -74,6 +80,8 @@ TEMPLATES = [
     },
 ]
 
+AUTH_USER_MODEL = 'users.Account'
+
 WSGI_APPLICATION = 'crowd_funding.wsgi.application'
 
 # Database
@@ -91,7 +99,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'crowd_funding',
         'USER': 'root',
-        'PASSWORD': 'Root123#',
+        'PASSWORD': 'root',
         'HOST': '127.0.0.1',
         'PORT': '3306'
     }
@@ -133,7 +141,18 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+SOCIAL_AUTH_FACEBOOK_KEY = 2530194673934561        # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '7f1db6b34f18d373d90832aef88912c4' # App Secret
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 
 ]
+
+# PROJECT_PATH = os.path.abspath(os.path.dirname(__name__))
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+#Authentication redirection
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"

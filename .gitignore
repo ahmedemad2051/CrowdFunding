@@ -4,3 +4,5 @@ __pycache__
 db.sqlite3
 *_initial.py
 *_auto_*
+images
+migrations/*.py

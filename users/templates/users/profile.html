@@ -1,0 +1,85 @@
+{% extends "layout/base.html" %}
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'users/css/profile.css' %}">
+
+<div class=" pt-120 cause_details ">
+    <div class="container">
+        <div class="row parent_div ">
+            <div class="row align-items-start">
+                <!--Profile Picture section -->
+                <div class="col-4 profile_div">
+                    <!--Profile Image-->
+                    <img src="{% static 'users/img/SomeOne.jpg' %}" alt="Avatar" id="profile_picture"> 
+
+                    <h2>Username</h2>
+
+                    <form class="form-inline">
+                        
+
+                        <label class="sr-only" for="inlineFormInputGroupUsername2">First Name</label>
+                        <div class="input-group mb-2 mr-sm-2">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-user"></i>
+                            </div>
+                          </div>
+                          <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="First Name">
+                        </div>
+
+                        <label class="sr-only" for="inlineFormInputGroupUsername2">Last Name</label>
+                        <div class="input-group mb-2 mr-sm-2">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-user"></i>
+                            </div>
+                          </div>
+                          <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Last Name">
+                        </div>
+
+                        <label class="sr-only" for="inlineFormInputGroupUsername2">Email</label>
+                        <div class="input-group mb-2 mr-sm-2">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-at"></i>
+                            </div>
+                          </div>
+                          <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Email">
+                        </div>
+                      
+                        <label class="sr-only" for="inlineFormInputGroupUsername2">Phone</label>
+                        <div class="input-group mb-2 mr-sm-2">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                          </div>
+                          <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Phone">
+                        </div>
+                      
+                        <button type="submit" class="btn btn-primary btn-lg mb-2">
+                            <i class="fa fa-check-square"></i> Submit
+                        </button>
+
+                      </form>
+
+
+                </div>
+
+                <div class="col-2">
+
+                </div>
+
+                <div class="col-6 projects_div">
+                    <h1>Test</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

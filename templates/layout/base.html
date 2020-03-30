@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="/static/layout/css/animate.css">
     <link rel="stylesheet" href="/static/layout/css/slicknav.css">
     <link rel="stylesheet" href="/static/layout/css/style.css">
+    <link rel="stylesheet" href="/static/layout/css/authenticate.css ">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
     {% block styles %} {% endblock %}
 </head>
@@ -54,6 +55,19 @@
     </div>
     <!-- bradcam_area_end  -->
 
+{% endblock %}
+
+{% block msg-error %}
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                    {{ message }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 {% endblock %}
 
 {% block content %} {% endblock %}
