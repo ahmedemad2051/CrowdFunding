@@ -51,3 +51,18 @@ class Donation(models.Model):
 
     def __str__(self):
         return f"{self.project} - {self.amount}"
+
+
+class Comment(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='comments')
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, related_name='replies', null=True, blank=True)
+    user = models.ForeignKey(to="users.Account", on_delete=models.CASCADE, related_name='comments')
+    body = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return 'Comment {} by {}'.format(self.body, self.user)

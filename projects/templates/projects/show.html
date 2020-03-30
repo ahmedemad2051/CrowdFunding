@@ -1,10 +1,13 @@
 {% extends "layout/base.html" %}
 
 {% load total_amount %}
-
+{% load crispy_forms_tags %}
 {% block styles %}
+    <link rel="stylesheet" href="/static/projects/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/projects/css/customStyle.css">
+    <link rel="stylesheet" href="/static/projects/css/comments.css">
 {% endblock %}
+
 
 {% block bradcam_text %}
     <a href="">{{ project.category }}</a>/{{ project.title }}
@@ -140,5 +143,58 @@
     {% endif %}
     <!-- similar projects end  -->
 
+    <!-- comments -->
 
+    <div class="container">
+        <hr>
+        <h2>{{ comments.count }} comments</h2>
+        <div class="post-comments">
+
+            <form method="post" data-comment-url="{% url 'projects.add_comment' project.slug %}"
+                  style="margin-top: 1.3em;">
+                {{ comment_form| crispy }}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-default add_comment btn-lg">Send</button>
+            </form>
+            <hr>
+            <hr>
+            <div class="row" id="show_comments" style="display: block">
+                {% include "projects/_comments.html" %}
+            </div>
+
+        </div>
+    </div>
+    <!-- comments end  -->
+{% endblock %}
+
+{% block scripts %}
+    <script src="/static/projects/js/comments.js"></script>
+    <script>
+        $(document).on("click", ".add_comment", function (e) {
+            e.preventDefault();
+            var form = $(this).closest("form");
+            var body = form.find("textarea");
+            if (body.val()) {
+                $.ajax({
+                    url: form.attr("data-comment-url"),
+                    data: form.serialize(),
+                    type: 'post',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.error_message) {
+                            alert(data.error_message);
+                        }
+                        if (data.status) {
+                            $("#show_comments").html(data.html);
+                            body.val('');
+                        }
+
+                    }
+                });
+            } else {
+                alert("Sorry, add a comment first!")
+            }
+
+        });
+    </script>
 {% endblock %}

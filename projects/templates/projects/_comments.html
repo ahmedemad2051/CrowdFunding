@@ -1,0 +1,114 @@
+{% for comment in comments %}
+    <div class="media">
+        <!-- first comment -->
+
+        <div class="media-heading">
+            <button class="btn btn-default btn-xs" type="button" data-toggle="collapse"
+                    data-target="#collapse{{ comment.id }}" aria-expanded="false"
+                    aria-controls="collapseExample"><span
+                    class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+            <span class="label label-info">{{ comment.user }}</span> {{ comment.created_at }}
+        </div>
+
+        <div class="panel-collapse collapse in show" id="collapse{{ comment.id }}">
+
+            <div class="media-left">
+                <div class="vote-wrap">
+                    <div class="save-post">
+                        <a href="#"><span class="glyphicon glyphicon-star" aria-label="Save"></span></a>
+                    </div>
+                    <div class="vote up">
+                        <i class="glyphicon glyphicon-menu-up"></i>
+                    </div>
+                    <div class="vote inactive">
+                        <i class="glyphicon glyphicon-menu-down"></i>
+                    </div>
+                </div>
+                <!-- vote-wrap -->
+            </div>
+            <!-- media-left -->
+
+
+            <div class="media-body">
+                <p>{{ comment.body | linebreaks }}</p>
+                <div class="comment-meta">
+                    <span><a href="#">report</a></span>
+                    <span>
+                        <a class="" role="button" data-toggle="collapse" href="#replyCommentT{{ comment.id }}"
+                           aria-expanded="false"
+                           aria-controls="collapseExample">reply</a>
+                      </span>
+                    <div class="collapse" id="replyCommentT{{ comment.id }}">
+                        <form method="post" data-comment-url="{% url 'projects.add_comment' project.slug %}"
+                              style="margin-top: 1.3em;">
+                            {% csrf_token %}
+                            <input type="hidden" name="parent" value="{{ comment.id }}">
+                            <div class="form-group">
+                                <label for="id_body_reply" class=" requiredField">
+                                    reply
+                                </label>
+                                <div class="">
+                                    <textarea name="body" cols="40" rows="3" class="textarea form-control"
+                                                        required="" id="id_body_reply" spellcheck="false"></textarea>
+                                </div>
+                            </div>
+                            <button type="submit"  class="btn btn-default add_comment btn-lg">Send</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- comment-meta -->
+                {% for reply in comment.replies.all %}
+                    <div class="media">
+                        <!-- answer to the first comment -->
+
+                        <div class="media-heading">
+                            <button class="btn btn-default btn-collapse btn-xs" type="button"
+                                    data-toggle="collapse"
+                                    data-target="#collapse{{ reply.id }}" aria-expanded="false"
+                                    aria-controls="collapseExample"><span
+                                    class="glyphicon glyphicon-minus"
+                                    aria-hidden="true"></span>
+                            </button>
+                            <span class="label label-info">{{ reply.user }}</span> {{ reply.created_at }}
+                        </div>
+
+                        <div class="panel-collapse collapse in" id="collapse{{ reply.id }}">
+
+                            <div class="media-left">
+                                <div class="vote-wrap">
+                                    <div class="save-post">
+                                        <a href="#"><span class="glyphicon glyphicon-star"
+                                                          aria-label="Save"></span></a>
+                                    </div>
+                                    <div class="vote up">
+                                        <i class="glyphicon glyphicon-menu-up"></i>
+                                    </div>
+                                    <div class="vote inactive">
+                                        <i class="glyphicon glyphicon-menu-down"></i>
+                                    </div>
+                                </div>
+                                <!-- vote-wrap -->
+                            </div>
+                            <!-- media-left -->
+
+
+                            <div class="media-body">
+                                <p>{{ reply.body | linebreaks }}</p>
+                                <div class="comment-meta">
+                                    <span><a href="#">report</a></span>
+                                </div>
+                                <!-- comment-meta -->
+                            </div>
+                        </div>
+                        <!-- comments -->
+
+                    </div>
+                    <!-- answer to the first comment -->
+                {% endfor %}
+
+            </div>
+        </div>
+        <!-- comments -->
+
+    </div>
+{% endfor %}

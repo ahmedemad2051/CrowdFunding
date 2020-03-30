@@ -1,10 +1,9 @@
 from django import forms
-from projects.models import Project, Image
-from tempus_dominus.widgets import DatePicker, TimePicker, DateTimePicker
+from projects.models import Project, Image, Comment
+from tempus_dominus.widgets import DateTimePicker
 
 
 class ProjectForm(forms.ModelForm):
-
     class Meta:
         model = Project
         fields = ['title', 'slug', 'desc', 'tags', 'category', 'total', 'start_date', 'end_date']
@@ -49,10 +48,8 @@ class ImageForm(forms.ModelForm):
         super(ImageForm, self).__init__(*args, **kwargs)
         self.fields['image'].widget.attrs = {'id': 'gallery-photo-add', 'multiple': 'multiple', 'class': 'form-control'}
 
-    # def clean(self):
-    #     cleaned_data = super(ImageForm, self).clean()
-    #     print(cleaned_data)
-    #     image_list = cleaned_data.get("image")
-    #     if image_list:
-    #         msg = u"End date should be greater than start date."
-    #         self._errors["image"] = self.error_class([msg])
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('body',)

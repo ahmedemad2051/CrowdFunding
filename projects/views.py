@@ -1,13 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from projects.forms import ProjectForm, ImageForm
+from projects.forms import ProjectForm, ImageForm, CommentForm
 from django.http import HttpResponse
 from django.forms import modelformset_factory
-from projects.models import Image, Project
+from projects.models import Image, Project, Comment
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.db.models import Sum
 from decimal import Decimal
+from django.http import JsonResponse
+from django.template.loader import render_to_string
 
 
 # Create your views here.
@@ -21,10 +23,14 @@ def index(req):
 
 def show(req, project_slug):
     context = {}
-    project = Project.objects.get(slug=project_slug)
+    project = get_object_or_404(Project, slug=project_slug)
+    comments = project.comments.filter(parent__active__isnull=True)
     similar_projects = Project.objects.filter(tags__in=project.tags.all()).exclude(id=project.id)
+    comment_form = CommentForm()
     context['project'] = project
     context['similar_projects'] = similar_projects
+    context['comments'] = comments
+    context['comment_form'] = comment_form
     return render(req, "projects/show.html", context)
 
 
@@ -73,3 +79,28 @@ def add_donations(req):
             messages.error(req, "Sorry, donation failed please try again later!!")
         return redirect("projects.show", project_slug=project_slug)
     return HttpResponseRedirect(req.META.get('HTTP_REFERER', '/'))
+
+
+@login_required
+def add_comment(req, project_slug):
+    data = {}
+    if req.method == 'POST':
+        project = Project.objects.get(slug=project_slug)
+        comment_form = CommentForm(data=req.POST)
+        if comment_form.is_valid():
+            # Create Comment object but don't save to database yet
+            new_comment = comment_form.save(commit=False)
+            parent = req.POST.get('parent')
+            if parent:
+                parent_comment = Comment.objects.get(id=parent)
+                new_comment.parent = parent_comment
+            new_comment.project = project
+            new_comment.user = req.user
+            new_comment.save()
+            comments = project.comments.filter(parent__active__isnull=True)
+            data['status'] = True
+            data['html'] = render_to_string("projects/_comments.html", {'comments': comments, 'project': project}, req)
+    else:
+        data['error_message'] = 'Error, please try again later'
+
+    return JsonResponse(data)

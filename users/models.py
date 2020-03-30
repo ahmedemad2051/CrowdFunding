@@ -56,7 +56,7 @@ class Account(AbstractBaseUser):
     objects = CFAccountManager()
 
     def __str__(self):
-        return self.email
+        return f'{self.first_name} {self.last_name}'
 
     def has_perm(self, perm, obj=None):
         return self.is_admin
