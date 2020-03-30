@@ -87,113 +87,28 @@
             <div class="row justify-content-center ">
                 <div class="col-lg-6">
                     <div class="section_title text-center mb-55">
-                        <h3><span>Reason of Helping</span></h3>
+                        <h3><span>LATEST BROJECTS </span></h3>
                     </div>
                 </div>
             </div>
             <div class="row justify-content-center">
-                {% comment %} <div class="col-lg-auto col-md-auto">
-                    <div class="single_reson">
-                        <div class="thum">
-                            <div class="thum_1">
-                                <img src="/static/layout/img/help/1.png" alt="">
-                            </div>
-                        </div>
-                        <div class="help_content">
-                            <h4>Collecting Fund</h4>
-                            <p>Lorem ipsum, or lipsum as it is
-                                sometimes known, is dummy
-                                text used in laying out print.</p>
-                            <a href="#" class="read_more">Read More</a>
-                        </div>
-                    </div>
-                </div> {% endcomment %}
                 {% for project in context.latestProjects%}
-                <div class="col-lg-auto col-md-auto">
+                <div class="col-lg-4 col-md-6">
                     <div class="single_reson">
                         <div class="thum">
                             <div class="thum_1">
-                                <img src="/static/layout/img/help/1.png" alt="">
+                                <img src="/media/{{ project.images.first }}" width="350px" height="208" alt="">         
                             </div>
                         </div>
                         <div class="help_content">
                             <h4>{{ project.title }}</h4>
-                            <p>Lorem ipsum, or lipsum as it is
-                                sometimes known, is dummy
-                                text used in laying out print.</p>
-                            <a href="#" class="read_more">Read More</a>
+                            <p>{{ project.desc|truncatewords:20  }}</p>
+                            <a class="read_more" href="{% url "projects.show" project.slug %}">Read More</a>
                         </div>
                     </div>
                 </div>
-                <br> <br> <br>
                 {% endfor %}
-                {% comment %} <br> <br> <br>
-                <div class="col-lg-auto col-md-auto">
-                    <div class="single_reson">
-                        <div class="thum">
-                            <div class="thum_1">
-                                <img src="/static/layout/img/help/2.png" alt="">
-                            </div>
-                        </div>
-                        <div class="help_content">
-                            <h4>Blood Camp</h4>
-                            <p>Lorem ipsum, or lipsum as it is
-                                sometimes known, is dummy
-                                text used in laying out print.</p>
-                            <a href="#" class="read_more">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-auto col-md-auto">
-                    <div class="single_reson">
-                        <div class="thum">
-                            <div class="thum_1">
-                                <img src="/static/layout/img/help/3.png" alt="">
-                            </div>
-                        </div>
-                        <div class="help_content">
-                            <h4>Friendly Volunteer</h4>
-                            <p>Lorem ipsum, or lipsum as it is
-                                sometimes known, is dummy
-                                text used in laying out print.</p>
-                            <a href="#" class="read_more">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> {% endcomment %}
-    <!-- reson_area_end  -->
 
-    <!-- latest_activites_area_start  -->
-    <!-- <div class="latest_activites_area">
-        <div class=" video_bg_1 video_activite  d-flex align-items-center justify-content-center">
-            <a class="popup-video" href="https://www.youtube.com/watch?v=MG3jGHnBVQs">
-                <i class="flaticon-ui"></i>
-            </a>
-        </div>
-        <div class="container">
-            <div class="row justify-content-end">
-                <div class="col-lg-7">
-                    <div class="activites_info">
-                        <div class="section_title">
-                            <h3><span>Watch Our Latest  </span><br>
-                                Activities</h3>
-                        </div>
-                        <p class="para_1">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do
-                            eiusmod tempor incididunt ut labore dolore magna aliqua.
-                            enim minim veniam, quis nostrud exercitation.</p class="para_1">
-                        <p class="para_2">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do
-                            eiusmod tempor incididunt ut labore dolore magna aliqua.
-                            enim minim veniam, quis nostrud exercitation. tempor
-                            incididunt ut labore dolore magna aliqua. enim minim
-                            veniam, quis nostrud exercitation.</p>
-                        <a href="#" data-scroll-nav='1' class="boxed-btn4">Donate Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
     <!-- latest_activites_area_end  -->
 
     <!-- popular_causes_area_start  -->
@@ -202,7 +117,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="section_title text-center mb-55">
-                        <h3><span>Featured Projects</span></h3>
+                        <h3><span>FEATURED PROJECTS</span></h3>
                     </div>
                 </div>
             </div>
@@ -235,7 +150,7 @@
                                     <span>Goal: ${{ project.total }} </span>
                                 </div>
                                 <h4>{{ project.title }}</h4>
-                                <p class="popular">{{ project.desc}}</p>
+                                <p class="popular">{{ project.desc|truncatewords:20 }}</p>
                                 <a class="read_more" href="{% url "projects.show" project.slug %}">Read More</a>                            </div>
                         </div>
                 </div>
