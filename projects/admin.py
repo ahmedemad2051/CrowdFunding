@@ -30,9 +30,9 @@ class ReportAdmin(admin.ModelAdmin):
     list_display = ('project', 'comment', 'user', 'content', 'created_at', 'seen')
     list_filter = ('project', 'seen', 'created_at')
     search_fields = ('user', 'project', 'comment')
-    actions = ['handle_report']
+    actions = ['mark_as_seen']
 
-    def handle_report(self, request, queryset):
+    def mark_as_seen(self, request, queryset):
         queryset.update(seen=True)
 
 
