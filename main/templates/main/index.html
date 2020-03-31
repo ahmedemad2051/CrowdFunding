@@ -7,6 +7,20 @@
 {% endblock %}
 {% block header %}
 {% load static %}
+<!-- Search form -->
+{% comment %} <form action="{% url 'search_results' %}" method="get">
+  <input name="q" type="text" placeholder="Search...">
+</form>
+
+<h1>Search Results</h1>
+
+<ul>
+  {% for project in context.results %}
+    <li>
+      {{ project.title }} <br> {{ project.desc }}
+    </li>
+  {% endfor %}
+</ul> {% endcomment %}
     <!-- slider_area_start -->
 <!--    <div class="slider_area">-->
 <!--        <div class="single_slider  d-flex align-items-center slider_bg_1 overlay2">-->
