@@ -1,5 +1,5 @@
 from django.contrib import admin
-from projects.models import Category, Project, Image, Comment
+from projects.models import Category, Project, Image, Comment, Report
 
 
 # Register your models here.
@@ -23,6 +23,17 @@ class CommentAdmin(admin.ModelAdmin):
 
     def approve_comments(self, request, queryset):
         queryset.update(active=True)
+
+
+@admin.register(Report)
+class ReportAdmin(admin.ModelAdmin):
+    list_display = ('project', 'comment', 'user', 'content', 'created_at', 'seen')
+    list_filter = ('project', 'seen', 'created_at')
+    search_fields = ('user', 'project', 'comment')
+    actions = ['handle_report']
+
+    def handle_report(self, request, queryset):
+        queryset.update(seen=True)
 
 
 admin.site.register(Project, PropertyAdmin)

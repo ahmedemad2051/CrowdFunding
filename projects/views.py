@@ -108,3 +108,7 @@ def add_comment(req, project_slug):
         data['error_message'] = 'Error, please try again later'
 
     return JsonResponse(data)
+
+
+def add_reports(req):
+    pass
