@@ -47,16 +47,21 @@
                             {% ratings project %}
                             <h4>{{ project.title }}</h4>
                             <p>{{ project.desc }}</p>
-                            <div class="extra_item">
-                                <div class="item-content-block">
-                                    <div class="block-title">Tags</div>
+                            <button class="genric-btn primary small add_report"
+                                    data-report-for="{{ project.id }}" data-report-type="project">Report
+                            </button>
+                            {% if project.tags.count %}
+                                <div class="extra_item">
+                                    <div class="item-content-block">
+                                        <div class="block-title">Tags</div>
+                                    </div>
+                                    <div class="item-content-block extra_tags">
+                                        {% for tag in project.tags.all %}
+                                            <a href="#">{{ tag }}</a>
+                                        {% endfor %}
+                                    </div>
                                 </div>
-                                <div class="item-content-block extra_tags">
-                                    {% for tag in project.tags.all %}
-                                        <a href="#">{{ tag }}</a>
-                                    {% endfor %}
-                                </div>
-                            </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -168,6 +173,36 @@
         </div>
     </div>
     <!-- comments end  -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <input type="hidden" id="report_type" name="report_type">
+                    <input type="hidden" id="report_for" name="report_for">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">make a Report</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <textarea class="single-textarea" name="content" placeholder="Report reason"
+                                  onfocus="this.placeholder = ''" onblur="this.placeholder = 'Report reason'"
+                                  required=""></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block scripts %}
@@ -198,6 +233,14 @@
                 alert("Sorry, add a comment first!")
             }
 
+        });
+        $(document).on("click", ".add_report", function (e) {
+            e.preventDefault();
+            var report_type = $(this).data("report-type");
+            var report_for = $(this).data("report-for");
+            $("#reportModal").find("#report_for").val(report_for);
+            $("#reportModal").find("#report_type").val(report_type);
+            $("#reportModal").modal()
         });
     </script>
 {% endblock %}

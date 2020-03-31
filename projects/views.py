@@ -109,3 +109,6 @@ def add_comment(req, project_slug):
 
     return JsonResponse(data)
 
+
+def add_reports(req):
+    pass

@@ -32,7 +32,7 @@
             <div class="media-body">
                 <p>{{ comment.body | linebreaks }}</p>
                 <div class="comment-meta">
-                    <span><a href="#">report</a></span>
+                    <span><a href="#" class="add_report" data-report-for="{{ comment.id }}" data-report-type="comment">report</a></span>
                     <span>
                         <a class="" role="button" data-toggle="collapse" href="#replyCommentT{{ comment.id }}"
                            aria-expanded="false"
@@ -49,10 +49,10 @@
                                 </label>
                                 <div class="">
                                     <textarea name="body" cols="40" rows="3" class="textarea form-control"
-                                                        required="" id="id_body_reply" spellcheck="false"></textarea>
+                                              required="" id="id_body_reply" spellcheck="false"></textarea>
                                 </div>
                             </div>
-                            <button type="submit"  class="btn btn-default add_comment btn-lg">Send</button>
+                            <button type="submit" class="btn btn-default add_comment btn-lg">Send</button>
                         </form>
                     </div>
                 </div>
@@ -95,7 +95,7 @@
                             <div class="media-body">
                                 <p>{{ reply.body | linebreaks }}</p>
                                 <div class="comment-meta">
-                                    <span><a href="#">report</a></span>
+                                    <span><a href="#" class="add_report" data-report-for="{{ reply.id }}" data-report-type="comment">report</a></span>
                                 </div>
                                 <!-- comment-meta -->
                             </div>

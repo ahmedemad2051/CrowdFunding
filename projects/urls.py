@@ -7,7 +7,7 @@ urlpatterns = [
     path('show/<slug:project_slug>', views.show, name="projects.show"),
     path('create', views.create, name="projects.create"),
     path('add_donations', views.add_donations, name="projects.add_donations"),
+    path('add_reports', views.add_reports, name="projects.add_reports"),
     path('add_comment/<slug:project_slug>', views.add_comment, name="projects.add_comment"),
     path('ratings', include('star_ratings.urls', namespace='ratings')),
-
 ]
