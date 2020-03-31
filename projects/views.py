@@ -71,7 +71,11 @@ def add_donations(req):
         project = Project.objects.get(slug=project_slug)
         all_donations = project.donations.aggregate(Sum('amount'))
         # return HttpResponse(all_donations['amount__sum'])
-        valid_amount = project.total - (all_donations['amount__sum'] + Decimal(amount))
+        amount__sum = all_donations['amount__sum']
+        if not amount__sum:
+            amount__sum = 0
+
+        valid_amount = project.total - (amount__sum + Decimal(amount))
         if project.owner != req.user and valid_amount >= 0:
             project.donations.create(amount=amount)
             messages.success(req, "Donation added successfully")
