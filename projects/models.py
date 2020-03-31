@@ -2,6 +2,8 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from taggit.managers import TaggableManager
 from users.models import Account
+from django.contrib.contenttypes.fields import GenericRelation
+from star_ratings.models import Rating
 
 
 # Create your models here.
@@ -13,6 +15,7 @@ class Project(models.Model):
     owner = models.ForeignKey(to="users.Account", on_delete=models.CASCADE, null=True)
     category = models.ForeignKey(to="Category", on_delete=models.CASCADE)
     tags = TaggableManager()
+    ratings = GenericRelation(Rating, related_query_name='projects')
     total = models.DecimalField(decimal_places=2, max_digits=10)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()

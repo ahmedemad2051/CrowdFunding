@@ -1,5 +1,6 @@
 {% extends "layout/base.html" %}
 {% load total_amount %}
+{% load ratings %}
 
 {% block bradcam_text %}
    Campaigns
@@ -32,6 +33,7 @@
                                     <span>Raised: ${{ project.donations.all | total_amount  }} </span>
                                     <span>Goal: ${{ project.total }} </span>
                                 </div>
+                                {% ratings project  icon_width=15 %}
                                 <a href="#"><h4>{{ project.title }}</h4></a>
                                 <p>{{ project.desc|truncatewords:20 }}</p>
                                 <a class="read_more" href="{% url "projects.show" project.slug %}">Read More</a>

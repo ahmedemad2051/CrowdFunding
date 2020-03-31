@@ -2,6 +2,8 @@
 
 {% load total_amount %}
 {% load crispy_forms_tags %}
+{% load ratings %}
+
 {% block styles %}
     <link rel="stylesheet" href="/static/projects/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/projects/css/customStyle.css">
@@ -42,6 +44,7 @@
                                 <span>Raised: ${{ all_donations }} </span>
                                 <span>Goal: ${{ project.total }} </span>
                             </div>
+                            {% ratings project %}
                             <h4>{{ project.title }}</h4>
                             <p>{{ project.desc }}</p>
                             <div class="extra_item">

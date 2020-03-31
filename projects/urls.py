@@ -1,5 +1,6 @@
-from django.urls import path
+from django.urls import path, include
 from projects import views
+from django.conf.urls import url
 
 urlpatterns = [
     path('', views.index, name="projects.all"),
@@ -7,4 +8,6 @@ urlpatterns = [
     path('create', views.create, name="projects.create"),
     path('add_donations', views.add_donations, name="projects.add_donations"),
     path('add_comment/<slug:project_slug>', views.add_comment, name="projects.add_comment"),
+    path('ratings', include('star_ratings.urls', namespace='ratings')),
+
 ]
