@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from projects.forms import ProjectForm, ImageForm, CommentForm
 from django.http import HttpResponse
 from django.forms import modelformset_factory
-from projects.models import Image, Project, Comment
+from projects.models import Image, Project, Comment, Report
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -110,5 +110,18 @@ def add_comment(req, project_slug):
     return JsonResponse(data)
 
 
+@login_required
 def add_reports(req):
-    pass
+    if req.POST:
+        report_type = req.POST.get('report_type')
+        report_for = req.POST.get('report_for')
+        content = req.POST.get('content')
+        if report_type == 'project':
+            obj = get_object_or_404(Project, id=report_for)
+        else:
+            obj = get_object_or_404(Comment, id=report_for)
+        report = Report(user=req.user, content=content)
+        report.report_for = obj
+        report.save()
+        messages.success(req, "Report Added Successfully")
+    return HttpResponseRedirect(req.META.get('HTTP_REFERER', '/'))
