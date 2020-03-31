@@ -1,0 +1,23 @@
+.active{
+    background-color: #1FCBAA !important;
+    border-style: none;
+}
+
+div {
+    font-family: 'Open Sans', sans-serif;
+}
+    
+h4{
+    font-family: 'Baloo Thambi 2', cursive;
+    color: #14565E;
+}
+
+.update_button{
+    background-color: #1FCBAA ;
+    border-style: none;
+}
+
+.update_button:hover {
+    background-color: #004F4A;
+    border-style: none;
+}
