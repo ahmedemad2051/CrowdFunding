@@ -1,5 +1,10 @@
-{% extends "layout/base.html" %}
+ {% extends "layout/base.html" %}
+ {% load total_amount %}
+{% block styles %}
+    <link rel="stylesheet" href="/static/main/customStyle.css">
+    <script src="/static/main/javascript/customJS.js"></script>
 
+{% endblock %}
 {% block header %}
 {% load static %}
     <!-- slider_area_start -->
@@ -79,96 +84,31 @@
     <!-- reson_area_start  -->
     <div class="reson_area section_padding">
         <div class="container">
-            <div class="row justify-content-center">
+            <div class="row justify-content-center ">
                 <div class="col-lg-6">
                     <div class="section_title text-center mb-55">
-                        <h3><span>Reason of Helping</span></h3>
+                        <h3><span>LATEST BROJECTS </span></h3>
                     </div>
                 </div>
             </div>
             <div class="row justify-content-center">
+                {% for project in context.latestProjects%}
                 <div class="col-lg-4 col-md-6">
                     <div class="single_reson">
                         <div class="thum">
                             <div class="thum_1">
-                                <img src="/static/layout/img/help/1.png" alt="">
+                                <img src="/media/{{ project.images.first }}" width="350px" height="208" alt="">         
                             </div>
                         </div>
                         <div class="help_content">
-                            <h4>Collecting Fund</h4>
-                            <p>Lorem ipsum, or lipsum as it is
-                                sometimes known, is dummy
-                                text used in laying out print.</p>
-                            <a href="#" class="read_more">Read More</a>
+                            <h4>{{ project.title }}</h4>
+                            <p>{{ project.desc|truncatewords:20  }}</p>
+                            <a class="read_more" href="{% url "projects.show" project.slug %}">Read More</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_reson">
-                        <div class="thum">
-                            <div class="thum_1">
-                                <img src="/static/layout/img/help/2.png" alt="">
-                            </div>
-                        </div>
-                        <div class="help_content">
-                            <h4>Blood Camp</h4>
-                            <p>Lorem ipsum, or lipsum as it is
-                                sometimes known, is dummy
-                                text used in laying out print.</p>
-                            <a href="#" class="read_more">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_reson">
-                        <div class="thum">
-                            <div class="thum_1">
-                                <img src="/static/layout/img/help/3.png" alt="">
-                            </div>
-                        </div>
-                        <div class="help_content">
-                            <h4>Friendly Volunteer</h4>
-                            <p>Lorem ipsum, or lipsum as it is
-                                sometimes known, is dummy
-                                text used in laying out print.</p>
-                            <a href="#" class="read_more">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- reson_area_end  -->
+                {% endfor %}
 
-    <!-- latest_activites_area_start  -->
-    <div class="latest_activites_area">
-        <div class=" video_bg_1 video_activite  d-flex align-items-center justify-content-center">
-            <a class="popup-video" href="https://www.youtube.com/watch?v=MG3jGHnBVQs">
-                <i class="flaticon-ui"></i>
-            </a>
-        </div>
-        <div class="container">
-            <div class="row justify-content-end">
-                <div class="col-lg-7">
-                    <div class="activites_info">
-                        <div class="section_title">
-                            <h3><span>Watch Our Latest  </span><br>
-                                Activities</h3>
-                        </div>
-                        <p class="para_1">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do
-                            eiusmod tempor incididunt ut labore dolore magna aliqua.
-                            enim minim veniam, quis nostrud exercitation.</p class="para_1">
-                        <p class="para_2">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do
-                            eiusmod tempor incididunt ut labore dolore magna aliqua.
-                            enim minim veniam, quis nostrud exercitation. tempor
-                            incididunt ut labore dolore magna aliqua. enim minim
-                            veniam, quis nostrud exercitation.</p>
-                        <a href="#" data-scroll-nav='1' class="boxed-btn4">Donate Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- latest_activites_area_end  -->
 
     <!-- popular_causes_area_start  -->
@@ -177,126 +117,346 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="section_title text-center mb-55">
-                        <h3><span>Popular Causes</span></h3>
+                        <h3><span>FEATURED PROJECTS</span></h3>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="causes_active owl-carousel">
+            {% for project in context.selectedProjects %}
+                <div class="col-lg-4 col-md-6">
+                
+                    
+                    
                         <div class="single_cause">
                             <div class="thumb">
-                                <img src="/static/layout/img/causes/1.png" alt="">
+                                <img src="/media/{{ project.images.first }}" width="350px" height="208" alt="">
                             </div>
                             <div class="causes_content">
                                 <div class="custom_progress_bar">
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 30%;"
+                                        <div class="progress-bar" role="progressbar" style="width: {{ project.donations.all | total_amount |total_amount_percent:project.total }}%;"
                                              aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
                                             <span class="progres_count">
-                                                30%
+                                                {{ project.donations.all | total_amount |total_amount_percent:project.total }}%
                                             </span>
                                         </div>
                                     </div>
                                 </div>
+                                
+
+ 
                                 <div class="balance d-flex justify-content-between align-items-center">
-                                    <span>Raised: $5000.00 </span>
-                                    <span>Goal: $9000.00 </span>
+                                    <span>Raised: ${{ project.donations.all | total_amount  }} </span>
+                                    <span>Goal: ${{ project.total }} </span>
                                 </div>
-                                <h4>Help us to Send Food</h4>
-                                <p>The passage is attributed to an
-                                    unknown typesetter in the century
-                                    who is thought</p>
-                                <a class="read_more" href="cause_details.html">Read More</a>
-                            </div>
+                                <h4>{{ project.title }}</h4>
+                                <p class="popular">{{ project.desc|truncatewords:20 }}</p>
+                                <a class="read_more" href="{% url "projects.show" project.slug %}">Read More</a>                            </div>
                         </div>
-                        <div class="single_cause">
-                            <div class="thumb">
-                                <img src="/static/layout/img/causes/2.png" alt="">
-                            </div>
-                            <div class="causes_content">
-                                <div class="custom_progress_bar">
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 30%;"
-                                             aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="progres_count">
-                                                30%
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="balance d-flex justify-content-between align-items-center">
-                                    <span>Raised: $5000.00 </span>
-                                    <span>Goal: $9000.00 </span>
-                                </div>
-                                <h4>Clothes For Everyone</h4>
-                                <p>The passage is attributed to an
-                                    unknown typesetter in the century
-                                    who is thought</p>
-                                <a class="read_more" href="cause_details.html">Read More</a>
-                            </div>
-                        </div>
-                        <div class="single_cause">
-                            <div class="thumb">
-                                <img src="/static/layout/img/causes/3.png" alt="">
-                            </div>
-                            <div class="causes_content">
-                                <div class="custom_progress_bar">
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 30%;"
-                                             aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="progres_count">
-                                                30%
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="balance d-flex justify-content-between align-items-center">
-                                    <span>Raised: $5000.00 </span>
-                                    <span>Goal: $9000.00 </span>
-                                </div>
-                                <h4>Water For All Children</h4>
-                                <p>The passage is attributed to an
-                                    unknown typesetter in the century
-                                    who is thought</p>
-                                <a class="read_more" href="cause_details.html">Read More</a>
-                            </div>
-                        </div>
-                        <div class="single_cause">
-                            <div class="thumb">
-                                <img src="/static/layout/img/causes/1.png" alt="">
-                            </div>
-                            <div class="causes_content">
-                                <div class="custom_progress_bar">
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 30%;"
-                                             aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="progres_count">
-                                                30%
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="balance d-flex justify-content-between align-items-center">
-                                    <span>Raised: $5000.00 </span>
-                                    <span>Goal: $9000.00 </span>
-                                </div>
-                                <h4>Help us to Send Food</h4>
-                                <p>The passage is attributed to an
-                                    unknown typesetter in the century
-                                    who is thought</p>
-                                <a class="read_more" href="cause_details.html">Read More</a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+                {% endfor %}
+                 
             </div>
+            
         </div>
-    </div>
+    </div>                    
+<!--icon slider-->
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h2>Trending <b>Products</b></h2>
+			<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+			<!-- Carousel indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+			</ol>
+			<!-- Wrapper for carousel items -->
+			<div class="carousel-inner">
+				<div class="item carousel-item active">
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="/examples/images/products/ipad.jpg" class="img-responsive img-fluid" alt="">
+								</div>
+								<div class="thumb-content">
+									<h4>Apple iPad</h4>
+									<p class="item-price"><strike>$400.00</strike> <span>$369.00</span></p>
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+										</ul>
+									</div>
+									<a href="#" class="btn btn-primary">Add to Cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="/examples/images/products/headphone.jpg" class="img-responsive img-fluid" alt="">
+								</div>
+								<div class="thumb-content">
+									<h4>Sony Headphone</h4>
+									<p class="item-price"><strike>$25.00</strike> <span>$23.99</span></p>
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+										</ul>
+									</div>
+									<a href="#" class="btn btn-primary">Add to Cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="/examples/images/products/macbook-air.jpg" class="img-responsive img-fluid" alt="">
+								</div>
+								<div class="thumb-content">
+									<h4>Macbook Air</h4>
+									<p class="item-price"><strike>$899.00</strike> <span>$649.00</span></p>
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
+										</ul>
+									</div>
+									<a href="#" class="btn btn-primary">Add to Cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="/examples/images/products/nikon.jpg" class="img-responsive img-fluid" alt="">
+								</div>
+								<div class="thumb-content">
+									<h4>Nikon DSLR</h4>
+									<p class="item-price"><strike>$315.00</strike> <span>$250.00</span></p>
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+										</ul>
+									</div>
+									<a href="#" class="btn btn-primary">Add to Cart</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="item carousel-item">
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="/examples/images/products/play-station.jpg" class="img-responsive img-fluid" alt="">
+								</div>
+								<div class="thumb-content">
+									<h4>Sony Play Station</h4>
+									<p class="item-price"><strike>$289.00</strike> <span>$269.00</span></p>
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+										</ul>
+									</div>
+									<a href="#" class="btn btn-primary">Add to Cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="/examples/images/products/macbook-pro.jpg" class="img-responsive img-fluid" alt="">
+								</div>
+								<div class="thumb-content">
+									<h4>Macbook Pro</h4>
+									<p class="item-price"><strike>$1099.00</strike> <span>$869.00</span></p>
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
+										</ul>
+									</div>
+									<a href="#" class="btn btn-primary">Add to Cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="/examples/images/products/speaker.jpg" class="img-responsive img-fluid" alt="">
+								</div>
+								<div class="thumb-content">
+									<h4>Bose Speaker</h4>
+									<p class="item-price"><strike>$109.00</strike> <span>$99.00</span></p>
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+										</ul>
+									</div>
+									<a href="#" class="btn btn-primary">Add to Cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="/examples/images/products/galaxy.jpg" class="img-responsive img-fluid" alt="">
+								</div>
+								<div class="thumb-content">
+									<h4>Samsung Galaxy S8</h4>
+									<p class="item-price"><strike>$599.00</strike> <span>$569.00</span></p>
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+										</ul>
+									</div>
+									<a href="#" class="btn btn-primary">Add to Cart</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="item carousel-item">
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="/examples/images/products/iphone.jpg" class="img-responsive img-fluid" alt="">
+								</div>
+								<div class="thumb-content">
+									<h4>Apple iPhone</h4>
+									<p class="item-price"><strike>$369.00</strike> <span>$349.00</span></p>
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+										</ul>
+									</div>
+									<a href="#" class="btn btn-primary">Add to Cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="/examples/images/products/canon.jpg" class="img-responsive img-fluid" alt="">
+								</div>
+								<div class="thumb-content">
+									<h4>Canon DSLR</h4>
+									<p class="item-price"><strike>$315.00</strike> <span>$250.00</span></p>
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+										</ul>
+									</div>
+									<a href="#" class="btn btn-primary">Add to Cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="/examples/images/products/pixel.jpg" class="img-responsive img-fluid" alt="">
+								</div>
+								<div class="thumb-content">
+									<h4>Google Pixel</h4>
+									<p class="item-price"><strike>$450.00</strike> <span>$418.00</span></p>
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+										</ul>
+									</div>
+									<a href="#" class="btn btn-primary">Add to Cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="/examples/images/products/watch.jpg" class="img-responsive img-fluid" alt="">
+								</div>
+								<div class="thumb-content">
+									<h4>Apple Watch</h4>
+									<p class="item-price"><strike>$350.00</strike> <span>$330.00</span></p>
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+										</ul>
+									</div>
+									<a href="#" class="btn btn-primary">Add to Cart</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Carousel controls -->
+			<a class="carousel-control left carousel-control-prev" href="#myCarousel" data-slide="prev">
+				<i class="carousel-control-prev-icon"></i>
+			</a>
+			<a class="carousel-control right carousel-control-next" href="#myCarousel" data-slide="next">
+				<i class="carousel-control-next-icon"></i>
+			</a>
+
+		</div>
+		</div>
+	</div>
+</div>
     <!-- popular_causes_area_end  -->
 
     <!-- counter_area_start  -->
-    <div class="counter_area">
+
+    
+    <!-- <div class="counter_area">
         <div class="container">
             <div class="counter_bg overlay">
                 <div class="row">
@@ -347,10 +507,12 @@
                 </div>
             </div>
         </div>
-    </div>
+    
+    </div> -->
     <!-- counter_area_end  -->
 
     <!-- our_volunteer_area_start  -->
+
     <div class="our_volunteer_area section_padding">
         <div class="container">
             <div class="row justify-content-center">
@@ -576,4 +738,9 @@
     {% endif %}
 
 
-{% endblock %}
+{% endblock %}  
+
+
+{% for p in context.selectedProjects %}
+<h1>{{ p.slug }}</h1>
+ {% endfor %} 
