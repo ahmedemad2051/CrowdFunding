@@ -6,3 +6,4 @@ db.sqlite3
 *_auto_*
 images
 migrations/*.py
+users/static/users/css/profile.css~
