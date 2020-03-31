@@ -10,6 +10,7 @@ from django.db.models import Sum
 from decimal import Decimal
 from django.http import JsonResponse
 from django.template.loader import render_to_string
+from django.db.models import Q
 
 
 # Create your views here.
@@ -17,7 +18,11 @@ from django.template.loader import render_to_string
 def index(req):
     context = {}
     projects = Project.objects.all()
+    # query = req.GET.get('q')
+    # results = Project.objects.filter(Q(title__icontains=query) | Q(tags__icontains=query))
+
     context['projects'] = projects
+    # context['results'] = results
     return render(req, "projects/index.html", context)
 
 

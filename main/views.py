@@ -21,8 +21,6 @@ def contact(request):
     return render(request, "main/contact.html")
 
 
-def search(request):
-    query = request.GET.get('q')
-    results = Project.objects.filter(Q(title__icontains=query) | Q(tags__icontains=query))
-
-    return render(request, "projects/index.html", {"results": results})
+# def search(request):
+#
+#     return render(request, "main/index.html", {"results": results})
