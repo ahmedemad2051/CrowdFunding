@@ -14,6 +14,7 @@ def index(req):
         "latestProjects": latestProjects
 
     }
+
     return render(req, "main/index.html", {"context": context})
 
 
