@@ -17,7 +17,7 @@ def index(req):
     return render(req, "main/index.html", {"context": context})
 
 
- def search(request):
+def search(request):
 
     query = request.GET.get('q')
     results = Project.objects.filter(Q(title__icontains=query) | Q(tags__icontains=query))
