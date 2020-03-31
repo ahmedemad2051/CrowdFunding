@@ -34,7 +34,7 @@ def get_image_category_filename(instance, filename):
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to=get_image_category_filename, null= True)
+    image = models.ImageField(upload_to=get_image_category_filename, null=True)
 
     def __str__(self):
         return self.name
@@ -77,3 +77,30 @@ class Comment(models.Model):
 
     def __str__(self):
         return 'Comment {} by {}'.format(self.body, self.user)
+
+
+class Report(models.Model):
+    project = models.ForeignKey(Project, null=True, blank=True, on_delete=models.CASCADE, related_name='reports')
+    comment = models.ForeignKey(Comment, null=True, blank=True, on_delete=models.CASCADE, related_name='reports')
+    user = models.ForeignKey('users.Account', on_delete=models.CASCADE, related_name='reports')
+    content = models.TextField()
+    seen = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def report_for(self):
+        return self.project or self.comment
+
+    @report_for.setter
+    def report_for(self, obj):
+        if type(obj) == Project:
+            self.project = obj
+            self.comment = None
+        elif type(obj) == Comment:
+            self.comment = obj
+            self.project = None
+        else:
+            raise ValueError("obj parameter must be an object of Project or Comment class")
+
+    def __str__(self):
+        return f'{self.user} - {self.report_for}'

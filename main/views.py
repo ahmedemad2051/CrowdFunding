@@ -14,6 +14,7 @@ def index(req):
         "latestProjects": latestProjects
 
     }
+
     return render(req, "main/index.html", {"context": context})
 
 
@@ -22,5 +23,12 @@ def contact(request):
 
 
 # def search(request):
+
 #
 #     return render(request, "main/index.html", {"results": results})
+
+#     query = request.GET.get('q')
+#     results = Project.objects.filter(Q(title__icontains=query) | Q(tags__icontains=query))
+#
+#     return render(request, "projects/index.html", {"results": results})
+
