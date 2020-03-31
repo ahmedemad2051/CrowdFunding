@@ -1,12 +1,12 @@
 {% extends "layout/base.html" %}
 {% block styles %}
     <link rel="stylesheet" href="/static/users/css/profile.css">
-
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Thambi+2:600&display=swap" rel="stylesheet">
 {% endblock %}
 
 {% block scripts %}
-
-
 
 {% endblock %}
 
@@ -17,20 +17,11 @@
     <div class="row">
 
       <div class="col-md-3 ">
-        <div class="list-group ">
-             <a href="#" class="list-group-item list-group-item-action active">Dashboard</a>
-             <a href="#" class="list-group-item list-group-item-action">User Management</a>
-             <a href="#" class="list-group-item list-group-item-action">Used</a>
-             <a href="#" class="list-group-item list-group-item-action">Enquiry</a>
-             <a href="#" class="list-group-item list-group-item-action">Dealer</a>
-             <a href="#" class="list-group-item list-group-item-action">Media</a>
-             <a href="#" class="list-group-item list-group-item-action">Post</a>
-             <a href="#" class="list-group-item list-group-item-action">Category</a>
-             <a href="#" class="list-group-item list-group-item-action">New</a>
-             <a href="#" class="list-group-item list-group-item-action">Comments</a>
-             <a href="#" class="list-group-item list-group-item-action">Appearance</a>
-             <a href="#" class="list-group-item list-group-item-action">Reports</a>
-             <a href="#" class="list-group-item list-group-item-action">Settings</a>
+        <div class="list-group">
+             <a href="#" class="list-group-item list-group-item-action active"><i class="fa fa-home"></i> Dashboard</a>
+             <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-briefcase"></i> Projects</a>
+             <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-credit-card"></i> Donations</a>
+             <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-cog"></i> Settings</a>
              
              
            </div> 
@@ -40,7 +31,10 @@
            <div class="card-body">
                <div class="row">
                    <div class="col-md-12">
-                       <h4>Your Profile</h4>
+                       <h4>
+                        <i class="fa fa-user-circle"></i>
+                         Your Profile
+                        </h4>
                        <hr>
                    </div>
                </div>
@@ -48,66 +42,78 @@
                    <div class="col-md-12">
                        <form>
                              <div class="form-group row">
-                               <label for="username" class="col-4 col-form-label">User Name*</label> 
+                               <label for="username" class="col-4 col-form-label"> <i class="fa fa-hashtag"></i> User Name*</label> 
                                <div class="col-8">
                                  <input id="username" name="username" placeholder="Username" class="form-control here" required="required" type="text">
                                </div>
                              </div>
                              <div class="form-group row">
-                               <label for="name" class="col-4 col-form-label">First Name</label> 
+                               <label for="name" class="col-4 col-form-label"> <i class="fa fa-user"></i> First Name</label> 
                                <div class="col-8">
                                  <input id="name" name="name" placeholder="First Name" class="form-control here" type="text">
                                </div>
                              </div>
                              <div class="form-group row">
-                               <label for="lastname" class="col-4 col-form-label">Last Name</label> 
+                               <label for="lastname" class="col-4 col-form-label"> <i class="fa fa-user"></i> Last Name</label> 
                                <div class="col-8">
                                  <input id="lastname" name="lastname" placeholder="Last Name" class="form-control here" type="text">
                                </div>
                              </div>
                              <div class="form-group row">
-                               <label for="text" class="col-4 col-form-label">Nick Name*</label> 
+                               <label for="email" class="col-4 col-form-label"> <i class="fa fa-at"></i> Email*</label> 
                                <div class="col-8">
-                                 <input id="text" name="text" placeholder="Nick Name" class="form-control here" required="required" type="text">
+                                 <input id="email" name="email" placeholder="Email" class="form-control here" required="required" type="text" disabled>
                                </div>
                              </div>
                              <div class="form-group row">
-                               <label for="select" class="col-4 col-form-label">Display Name public as</label> 
+                              <label for="newpass" class="col-4 col-form-label"> <i class="fa fa-asterisk"></i> New Password</label> 
+                              <div class="col-8">
+                                <input type="password" id="newpass" name="newpass" placeholder="New Password" class="form-control here" type="text">
+                              </div>
+                            </div> 
+                            <br>
+                            
+                           
+                            <div class="row">
+                              <div class="col-md-12">
+                                  <h4>
+                                    <i class="fa fa-plus-circle"></i>
+                                    Additional Info 
+                                   </h4>
+                              </div>
+                          </div>
+                          <hr>
+                          <br>
+                             <div class="form-group row">
+                               <label for="facebook" class="col-4 col-form-label"><i class="fa fa-facebook-official"></i> Facebook</label> 
                                <div class="col-8">
-                                 <select id="select" name="select" class="custom-select">
-                                   <option value="admin">Admin</option>
-                                 </select>
+                                 <input id="facebook" name="facebook" placeholder="facebook profile link" class="form-control here" type="text">
                                </div>
                              </div>
                              <div class="form-group row">
-                               <label for="email" class="col-4 col-form-label">Email*</label> 
-                               <div class="col-8">
-                                 <input id="email" name="email" placeholder="Email" class="form-control here" required="required" type="text">
-                               </div>
-                             </div>
+                              <label for="instagram" class="col-4 col-form-label"> <i class="fa fa-instagram"></i> Instagram</label> 
+                              <div class="col-8">
+                                <input id="instagram" name="instagram" placeholder="instagram profile link" class="form-control here" type="text">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label for="twitter" class="col-4 col-form-label"><i class="fa fa-twitter-square"></i> Twitter</label> 
+                              <div class="col-8">
+                                <input id="twitter" name="twitter" placeholder="twitter profile link" class="form-control here" type="text">
+                              </div>
+                            </div>
                              <div class="form-group row">
-                               <label for="website" class="col-4 col-form-label">Website</label> 
-                               <div class="col-8">
-                                 <input id="website" name="website" placeholder="website" class="form-control here" type="text">
-                               </div>
-                             </div>
-                             <div class="form-group row">
-                               <label for="publicinfo" class="col-4 col-form-label">Public Info</label> 
+                               <label for="publicinfo" class="col-4 col-form-label"> <i class="fa fa-globe"></i> Public Info</label> 
                                <div class="col-8">
                                  <textarea id="publicinfo" name="publicinfo" cols="40" rows="4" class="form-control"></textarea>
                                </div>
                              </div>
                              <div class="form-group row">
-                               <label for="newpass" class="col-4 col-form-label">New Password</label> 
-                               <div class="col-8">
-                                 <input id="newpass" name="newpass" placeholder="New Password" class="form-control here" type="text">
-                               </div>
-                             </div> 
-                             <div class="form-group row">
-                               <div class="offset-4 col-8">
-                                 <button name="submit" type="submit" class="btn btn-primary">Update My Profile</button>
-                               </div>
-                             </div>
+                              <div class="offset-4 col-8">
+                                <button name="submit" type="submit" class="btn btn-primary update_button"> <i class="fa fa-edit"></i> Update My Profile</button>
+                              </div>
+                            </div>
+                             
                            </form>
                    </div>
                </div>
