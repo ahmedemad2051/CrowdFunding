@@ -158,12 +158,17 @@
                                         <i class="fa fa-briefcase"></i>
                                         Projects
                                     </h4>
+                                    <h5>
+                                        <i class="fa fa-codepen"></i>
+                                        In total you've got {{ user_projects.count }} projects
+                                    </h5>
                                     <hr>
 
                                     <!--Display user projects -->
                                     {% for project in user_projects %}
                                         <div class="col-lg-4 col-md-6">
                                             <div class="single_cause">
+                                                <h4> <i class="fa fa-hashtag"></i> <a href="#"> </a>{{ project.title }}</h4></a>
                                                 <div class="thumb">
                                                     <img src="/media/{{ project.images.first }}" width="350px" height="208" alt="">
                                                 </div>
@@ -183,12 +188,14 @@
                                                         <span>Goal: ${{ project.total }} </span>
                                                     </div>
                                                     {% ratings project  icon_width=15 %}
-                                                    <a href="#"><h4>{{ project.title }}</h4></a>
+                                                    
                                                     <p>{{ project.desc|truncatewords:20 }}</p>
                                                     <a class="read_more" href="{% url "projects.show" project.slug %}">Read More</a>
                                                 </div>
                                             </div>
                                         </div>
+                                        <hr>
+                                        <br>
                                 {% endfor %}
 
                                 </div>
