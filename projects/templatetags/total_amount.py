@@ -13,5 +13,6 @@ def total_amount(donations):
 
 
 @register.filter(name='total_amount_percent')
-def total_amount(donations, target):
+@register.simple_tag
+def total_amount_percent(donations, target):
     return int((donations * 100) / target)

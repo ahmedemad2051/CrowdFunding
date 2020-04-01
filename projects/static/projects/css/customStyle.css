@@ -61,3 +61,8 @@
 #reportModal{
     z-index: 1000000;
 }
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}

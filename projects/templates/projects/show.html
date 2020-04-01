@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/static/projects/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/projects/css/customStyle.css">
     <link rel="stylesheet" href="/static/projects/css/comments.css">
+    <link rel="stylesheet" href="/static/projects/css/sweetalert2.min.css">
 {% endblock %}
 
 
@@ -18,11 +19,17 @@
 {% block content %}
 
     {% total_amount project.donations.all as all_donations %}
+    {% total_amount_percent all_donations project.total as donations_percentage %}
     <!-- popular_causes_area_start  -->
     <div class="popular_causes_area pt-120 cause_details ">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
+                    {% if not project.enable %}
+                        <div class="alert alert-danger text-center" role="alert">
+                            Campaign cancelled by the owner!
+                        </div>
+                    {% endif %}
                     <div class="single_cause">
                         <div class="thumb">
                             <img src="/media/{{ project.images.first }}" alt="">
@@ -35,7 +42,7 @@
                                          aria-valuenow="30"
                                          aria-valuemin="0" aria-valuemax="100">
                                         <span class="progres_count">
-                                            {{ all_donations |total_amount_percent:project.total }}%
+                                            {{ donations_percentage }}%
                                         </span>
                                     </div>
                                 </div>
@@ -47,9 +54,16 @@
                             {% ratings project %}
                             <h4>{{ project.title }}</h4>
                             <p>{{ project.desc }}</p>
-                            <button class="genric-btn primary small add_report"
-                                    data-report-for="{{ project.id }}" data-report-type="project">Report
-                            </button>
+                            {% if project.owner != user %}
+                                <button class="genric-btn primary small add_report"
+                                        data-report-for="{{ project.id }}" data-report-type="project">Report
+                                </button>
+                            {% else %}
+                                <a class="genric-btn primary small " href="">Edit</a>
+                                {% if project.enable and donations_percentage < 25 %}
+                                    <a class="genric-btn primary small " id="cancel_project" href="#">Cancel</a>
+                                {% endif %}
+                            {% endif %}
                             {% if project.tags.count %}
                                 <div class="extra_item">
                                     <div class="item-content-block">
@@ -207,6 +221,7 @@
 
 {% block scripts %}
     <script src="/static/projects/js/comments.js"></script>
+    <script src="/static/projects/js/sweetalert2.min.js"></script>
     <script>
         $(document).on("click", ".add_comment", function (e) {
             e.preventDefault();
@@ -242,5 +257,23 @@
             $("#reportModal").find("#report_type").val(report_type);
             $("#reportModal").modal()
         });
+        {% if project.enable and donations_percentage < 25 %}
+            $(document).on("click", "#cancel_project", function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Are you sure to cancel this project?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, do it!'
+                }).then((result) => {
+                    if (result.value) {
+                        location.href = "{% url 'projects.cancel' project.slug %}";
+                    }
+                })
+            });
+        {% endif %}
     </script>
 {% endblock %}

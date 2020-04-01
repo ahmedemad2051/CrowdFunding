@@ -16,7 +16,7 @@ from django.template.loader import render_to_string
 
 def index(req):
     context = {}
-    projects = Project.objects.all()
+    projects = Project.objects.filter(enable=True)
     context['projects'] = projects
     return render(req, "projects/index.html", context)
 
@@ -24,6 +24,8 @@ def index(req):
 def show(req, project_slug):
     context = {}
     project = get_object_or_404(Project, slug=project_slug)
+    if not project.enable and project.owner != req.user:
+        return redirect("projects.all")
     comments = project.comments.filter(parent__active__isnull=True)
     similar_projects = Project.objects.filter(tags__in=project.tags.all()).exclude(id=project.id)
     comment_form = CommentForm()
@@ -63,18 +65,22 @@ def create(req):
     return render(req, "projects/create.html", context)
 
 
+def get_project_donations(project):
+    all_donations = project.donations.aggregate(Sum('amount'))
+    # return HttpResponse(all_donations['amount__sum'])
+    amount__sum = all_donations['amount__sum']
+    if not amount__sum:
+        amount__sum = 0
+    return amount__sum
+
+
 @login_required
 def add_donations(req):
     if req.POST:
         project_slug = req.POST.get("project")
         amount = req.POST.get("amount")
         project = Project.objects.get(slug=project_slug)
-        all_donations = project.donations.aggregate(Sum('amount'))
-        # return HttpResponse(all_donations['amount__sum'])
-        amount__sum = all_donations['amount__sum']
-        if not amount__sum:
-            amount__sum = 0
-
+        amount__sum = get_project_donations(project)
         valid_amount = project.total - (amount__sum + Decimal(amount))
         if project.owner != req.user and valid_amount >= 0:
             project.donations.create(amount=amount)
@@ -125,3 +131,18 @@ def add_reports(req):
         report.save()
         messages.success(req, "Report Added Successfully")
     return HttpResponseRedirect(req.META.get('HTTP_REFERER', '/'))
+
+
+@login_required
+def cancel_project(req, project_slug):
+    project = get_object_or_404(Project, slug=project_slug)
+    amount__sum = get_project_donations(project)
+    donations_percent = int((amount__sum * 100) / project.total)
+    if project.owner == req.user and donations_percent < 25:
+        project.enable = False
+        project.save()
+        messages.success(req, f'project {project.title} has been cancelled!!')
+    else:
+        messages.error(req,
+                       "Sorry,You can not cancel the project either you don't have right permissions or project donations up to 25%")
+    return redirect("projects.show", project_slug=project_slug)
