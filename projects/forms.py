@@ -7,7 +7,7 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         fields = ['title', 'slug', 'desc', 'tags', 'category', 'total', 'start_date', 'end_date']
-        labels = {'desc': 'Description'}
+        labels = {'desc': 'Description', 'total': 'Total target'}
 
     def __init__(self, *args, **kwargs):
         super(ProjectForm, self).__init__(*args, **kwargs)
@@ -21,7 +21,7 @@ class ProjectForm(forms.ModelForm):
 
         # self.fields['tags'].widget = forms.ModelMultipleChoiceField(queryset = Tag.objects.all())
         # self.fields['tags'].widget.
-        self.fields['tags'].widget.attrs = {'class': 'form-control valid js-tags-multiple'}
+        self.fields['tags'].widget.attrs = {'class': 'form-control', 'data-role': "tagsinput"}
         self.fields['category'].widget.attrs = {'class': 'form-control valid'}
         self.fields['start_date'].widget = DateTimePicker()
         self.fields['end_date'].widget = DateTimePicker()

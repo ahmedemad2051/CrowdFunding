@@ -65,6 +65,37 @@ def create(req):
     return render(req, "projects/create.html", context)
 
 
+@login_required
+def update(req, project_slug):
+    context = {}
+    ImageFormSet = modelformset_factory(Image, form=ImageForm, extra=1)
+    project = get_object_or_404(Project, slug=project_slug, owner=req.user)
+    project_form = ProjectForm(req.POST or None, instance=project)
+    if req.method == "POST":
+        formset = ImageFormSet(req.POST, req.FILES,
+                               queryset=project.images.all())
+        if project_form.is_valid() and formset.is_valid():
+            project = project_form.save(commit=False)
+            project.owner = req.user
+            project.save()
+            project_form.save_m2m()
+
+            for form in formset.cleaned_data:
+                if 'image' in form:
+                    image = form['image']
+                    photo = Image(project=project, image=image)
+                    photo.save()
+
+            messages.success(req, "Campaign Updated Successfully!")
+            return redirect("projects.show", project_slug)
+    else:
+        formset = ImageFormSet(queryset=project.images.all())
+    context['project'] = project
+    context['form'] = project_form
+    context['formset'] = formset
+    return render(req, "projects/update.html", context)
+
+
 def get_project_donations(project):
     all_donations = project.donations.aggregate(Sum('amount'))
     # return HttpResponse(all_donations['amount__sum'])
@@ -82,7 +113,7 @@ def add_donations(req):
         project = Project.objects.get(slug=project_slug)
         amount__sum = get_project_donations(project)
         valid_amount = project.total - (amount__sum + Decimal(amount))
-        if project.owner != req.user and valid_amount >= 0:
+        if project.owner != req.user and valid_amount >= 0 and project.enable:
             project.donations.create(amount=amount)
             messages.success(req, "Donation added successfully")
         else:

@@ -59,7 +59,7 @@
                                         data-report-for="{{ project.id }}" data-report-type="project">Report
                                 </button>
                             {% else %}
-                                <a class="genric-btn primary small " href="">Edit</a>
+                                <a class="genric-btn primary small " href="{% url 'projects.update' project.slug %}">Edit</a>
                                 {% if project.enable and donations_percentage < 25 %}
                                     <a class="genric-btn primary small " id="cancel_project" href="#">Cancel</a>
                                 {% endif %}

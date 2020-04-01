@@ -1,0 +1,138 @@
+{% extends "layout/base.html" %}
+{% load crispy_forms_tags %}
+{% block styles %}
+    <link rel="stylesheet" href="/static/projects/css/customStyle.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css"/>
+    <link href="/static/layout/css/select2.min.css" rel="stylesheet"/>
+    <link href="/static/projects/css/bootstrap-tagsinput.css" rel="stylesheet"/>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="/static/layout/js/select2.min.js"></script>
+    <script src="/static/projects/js/bootstrap-tagsinput.min.js"></script>
+    <script>
+        $(function () {
+            // Multiple images preview in browser
+            var imagesPreview = function (input, placeToInsertImagePreview) {
+
+                if (input.files) {
+                    var filesAmount = input.files.length;
+
+                    for (i = 0; i < filesAmount; i++) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (event) {
+                            $($.parseHTML('<img>')).attr("class", "cus_img").attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                        }
+
+                        reader.readAsDataURL(input.files[i]);
+                    }
+                }
+
+            };
+
+            $('#gallery-photo-add').on('change', function () {
+                imagesPreview(this, 'div.gallery');
+            });
+        });
+        $(document).ready(function () {
+            $('.js-tags-multiple').select2({
+                {#tags: true,#}
+            });
+        });
+    </script>
+{% endblock %}
+{% block bradcam_text %}
+    Update A Campaign
+{% endblock %}
+{% block content %}
+
+    <section class="contact-section">
+        <div class="container">
+
+
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="contact-title">Update {{ project.title }} Campaign</h2>
+                </div>
+                <div class="col-lg-9">
+                    <form class="form-contact contact_form" method="post"
+                          novalidate="novalidate" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    {{ form.title | as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    {{ form.slug|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <div class="default-select" id="default-select">
+                                        {{ form.category|as_crispy_field }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    {{ form.tags|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    {{ form.desc|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    {{ form.total|as_crispy_field }}
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    {{ form.start_date|as_crispy_field }}
+                                    <p class="invalid-feedback"><strong>{{ form.start_date.errors }}</strong></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    {{ form.end_date|as_crispy_field }}
+                                    <p class="invalid-feedback"><strong>{{ form.end_date.errors }}</strong></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    {{ formset.management_form }}
+                                    {{ formset| crispy }}
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <div class="gallery"></div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="form-group mt-3">
+                            <button type="submit" class="button button-contactForm boxed-btn">Send</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
