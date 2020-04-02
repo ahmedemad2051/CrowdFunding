@@ -1,4 +1,5 @@
 {% load static %}
+{% load latest_projects %}
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -152,15 +153,17 @@
                         <ul class="news_links">
                             <li>
                                 <div class="info">
-                                    {% for project in context.last_two_projects %}
-                                    <div class="col-lg-4 col-md-6">
-                                        <h4>{{ project.title }}</h4>
-                                        <div class="thum_1">
-                                            <img src="/media/{{ project.images.first }}" width="190px" height="120px" alt="">
+                                {% latest_projects as latest_projects %}
+                                    {% for project in latest_projects %}
+                                        <div class="col-lg-4 col-md-6">
+                                            <h4><a href="{% url 'projects.show' project.slug %}">{{ project.title }}</a> </h4>
+                                            <div class="thum_1">
+                                                <img src="/media/{{ project.images.first }}" width="190px"
+                                                     height="120px" alt="">
+                                            </div>
+                                            <hr>
                                         </div>
-                                        <hr>
-                                    </div>
-                                {% endfor %}
+                                    {% endfor %}
                             </li>
                         </ul>
                     </div>
