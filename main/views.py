@@ -1,17 +1,21 @@
 from django.shortcuts import render
 from django.db.models import Q
-from projects.models import Project
+from projects.models import Project, Category
 
 
 # Create your views here.
 
 def index(req):
-    selectedProjects = Project.objects.filter(active=True)[:6]
-    latestProjects = Project.objects.order_by('-created_at')[:5]
+    selectedProjects = Project.objects.filter(active=True, enable=True)[:6]
+    latestProjects = Project.objects.filter(enable=True).order_by('-created_at')[:5]
+    top_rated = Project.objects.filter(ratings__isnull=False).order_by('ratings__average')[:5]
+    categories = Category.objects.all()
 
     context = {
         "selectedProjects": selectedProjects,
-        "latestProjects": latestProjects
+        "latestProjects": latestProjects,
+        'top_rated': top_rated,
+        'categories': categories,
 
     }
 
@@ -20,7 +24,6 @@ def index(req):
 
 def contact(request):
     return render(request, "main/contact.html")
-
 
 # def search(request):
 #     query = request.GET.get('q')

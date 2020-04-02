@@ -114,7 +114,7 @@ def add_donations(req):
         amount__sum = get_project_donations(project)
         valid_amount = project.total - (amount__sum + Decimal(amount))
         if project.owner != req.user and valid_amount >= 0 and project.enable:
-            project.donations.create(amount=amount)
+            project.donations.create(amount=amount, user=req.user)
             messages.success(req, "Donation added successfully")
         else:
             messages.error(req, "Sorry, donation failed please try again later!!")
