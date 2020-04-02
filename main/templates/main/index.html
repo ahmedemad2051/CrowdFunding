@@ -144,20 +144,21 @@
                                 </ol>
                                 <!-- Wrapper for carousel items -->
                                 <div class="carousel-inner">
+
                                     <div class="item carousel-item active">
+
                                         <div class="row">
-                                            {% for project in context.categories %}
-                                            <div class="col-sm-3">
+
+                                         {% for project in context.categories %}
+                                            <div class="col-lg-3">
                                                 <div class="thumb-wrapper">
                                                     <div class="img-box">
-                                                        <img src="/media/{{ project.images.first }}"
+                                                        <img src="/media/{{ project.image }}"
                                                              class="img-responsive img-fluid" alt="">
                                                     </div>
                                                     <div class="thumb-content">
-                                                        <h4>{{ project.title }}</h4>
+                                                        <h4>{{ project.name }}</h4>
 
-
-                                                        <a href="#" class="btn btn-primary">Add to Cart</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -504,7 +505,8 @@
 <!--                                            </div>-->
 <!--                                        </div>-->
 <!--                                    </div>-->
-<!--                                </div>-->
+                                </div>
+
                                 <!-- Carousel controls -->
                                 <a class="carousel-control left carousel-control-prev" href="#myCarousel"
                                    data-slide="prev">

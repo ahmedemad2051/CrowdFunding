@@ -48,6 +48,7 @@ h2::after {
 	height: 160px;
 	width: 100%;
 	position: relative;
+	margin-top: 40px;
 }
 .carousel .item img {
 	max-width: 100%;
@@ -96,7 +97,7 @@ h2::after {
 	height: 50px;
     width: 40px;
     background: none;
-    margin: auto 0;
+    margin-top: 100px;
     background: #999;
 }
 .carousel .carousel-control i {
@@ -104,7 +105,7 @@ h2::after {
    position: absolute;
     top: 50%;
     display: inline-block;
-    margin: -16px 0 0 0;
+    margin: -10px 0 0 0;
     z-index: 5;
     left: 0;
     right: 0;

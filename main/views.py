@@ -9,8 +9,8 @@ def index(req):
     selectedProjects = Project.objects.filter(active=True, enable=True)[:6]
     latestProjects = Project.objects.filter(enable=True).order_by('-created_at')[:5]
     top_rated = Project.objects.filter(ratings__isnull=False).order_by('ratings__average')[:5]
-    categories = Category.objects.all()
-    print(categories.count())
+    categories = Category.objects.all()[:4]
+
 
     context = {
         "selectedProjects": selectedProjects,
