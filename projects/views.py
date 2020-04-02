@@ -17,6 +17,11 @@ from django.template.loader import render_to_string
 def index(req):
     context = {}
     projects = Project.objects.filter(enable=True)
+    if 'category' in req.GET:
+        category = req.GET.get('category')
+        context['category'] = category
+        projects = projects.filter(category__name=category)
+
     context['projects'] = projects
     return render(req, "projects/index.html", context)
 
