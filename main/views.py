@@ -8,12 +8,14 @@ from projects.models import Project, Category
 def index(req):
     selectedProjects = Project.objects.filter(active=True, enable=True)[:6]
     latestProjects = Project.objects.filter(enable=True).order_by('-created_at')[:5]
+    last_two_projects = Project.objects.filter(enable=True).order_by('-created_at')[:2]
     top_rated = Project.objects.filter(ratings__isnull=False).order_by('ratings__average')[:5]
     categories = Category.objects.all()
     print(categories.count())
 
     context = {
         "selectedProjects": selectedProjects,
+        "last_two_projects": last_two_projects,
         "latestProjects": latestProjects,
         'top_rated': top_rated,
         'categories': categories,
