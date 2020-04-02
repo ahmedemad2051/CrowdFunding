@@ -7,11 +7,10 @@ from projects.models import Image, Project, Comment, Donation
 @login_required
 def profile(request):
     context = {}
-    user_projects = Project.objects.filter(owner = request.user) # get user projects
-    # user_donations = Donation.objects.filter(project = request.user)
-    # print(user_donations)
+
+    user_projects = Project.objects.filter(owner=request.user)  # get user projects
+    donations = Project.objects.filter(donations__user=request.user)  # get user projects
     context['user_projects'] = user_projects
-    # context['user_donations'] = user_donations
+    context['donations'] = donations
 
     return render(request, "users/profile.html", context)
-
