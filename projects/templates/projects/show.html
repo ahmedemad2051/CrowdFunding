@@ -257,7 +257,6 @@
             $("#reportModal").find("#report_type").val(report_type);
             $("#reportModal").modal()
         });
-        {% if project.enable and donations_percentage < 25 %}
             $(document).on("click", "#cancel_project", function (e) {
                 e.preventDefault();
                 Swal.fire({
@@ -274,6 +273,5 @@
                     }
                 })
             });
-        {% endif %}
     </script>
 {% endblock %}
