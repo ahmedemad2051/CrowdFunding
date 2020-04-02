@@ -3456,3 +3456,13 @@ iframe {
     opacity: 1;
   }
 }
+
+.fa-facebook-square{
+	font-size: 50px;
+	margin-top: 10px;
+	color: #2E6199;
+}
+
+.fa-facebook-square:hover{
+	color: #4F86B2;
+}

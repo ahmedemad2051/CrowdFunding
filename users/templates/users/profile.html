@@ -2,10 +2,10 @@
 {% load total_amount %}
 {% load ratings %}
 {% block styles %}
-    <link rel="stylesheet" href="/static/users/css/profile.css">
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Baloo+Thambi+2:600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/users/css/profile.css">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Baloo+Thambi+2:600&display=swap" rel="stylesheet">
 {% endblock %}
 
 {% block scripts %}
@@ -13,293 +13,295 @@
 {% endblock %}
 
 {% block bradcam_text %}
-    Profile
+Profile
 {% endblock %}
 
 {% block content %}
-    <div class=" pt-120 cause_details ">
-        <div class="container emp-profile">
-            <div class="row">
+<div class=" pt-120 cause_details ">
+    <div class="container emp-profile">
+        <div class="row">
 
-                <div class="col-md-3 ">
-                    <div class="list-group">
-                        <a href="#tab1" data-toggle="tab" class="list-group-item list-group-item-action active"><i
-                                class="fa fa-home"></i> Dashboard</a>
-                        <a href="#tab2" data-toggle="tab" class="list-group-item list-group-item-action"><i
-                                class="fa fa-briefcase"></i> Projects</a>
-                        <a href="#tab3" data-toggle="tab" class="list-group-item list-group-item-action"><i
-                                class="fa fa-credit-card"></i> Donations</a>
+            <div class="col-md-3 ">
+                <div class="list-group">
+                    <a href="#tab1" data-toggle="tab" class="list-group-item list-group-item-action active"><i
+                            class="fa fa-home"></i> Dashboard</a>
+                    <a href="#tab2" data-toggle="tab" class="list-group-item list-group-item-action"><i
+                            class="fa fa-briefcase"></i> Projects</a>
+                    <a href="#tab3" data-toggle="tab" class="list-group-item list-group-item-action"><i
+                            class="fa fa-credit-card"></i> Donations</a>
 
 
-                    </div>
                 </div>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="tab1">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h4>
-                                            <i class="fa fa-user-circle"></i>
-                                            Your Profile
-                                        </h4>
-                                        <hr>
-                                    </div>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab1">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4>
+                                        <i class="fa fa-user-circle"></i>
+                                        Your Profile
+                                    </h4>
+                                    <hr>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <form>
-                                            <div class="form-group row">
-                                                <label for="username" class="col-4 col-form-label"> <i
-                                                        class="fa fa-hashtag"></i> User Name*</label>
-                                                <div class="col-8">
-                                                    <input id="username" name="username" placeholder="Username"
-                                                           class="form-control here" required="required" type="text">
-                                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form>
+                                        <div class="form-group row">
+                                            <label for="username" class="col-4 col-form-label"> <i
+                                                    class="fa fa-hashtag"></i> User Name*</label>
+                                            <div class="col-8">
+                                                <input id="username" name="username" placeholder="Username"
+                                                       class="form-control here" required="required" type="text">
                                             </div>
-                                            <div class="form-group row">
-                                                <label for="name" class="col-4 col-form-label"> <i
-                                                        class="fa fa-user"></i>
-                                                    First Name</label>
-                                                <div class="col-8">
-                                                    <input id="name" name="name" placeholder="First Name"
-                                                           class="form-control here" type="text">
-                                                </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="name" class="col-4 col-form-label"> <i
+                                                    class="fa fa-user"></i>
+                                                First Name</label>
+                                            <div class="col-8">
+                                                <input id="name" name="name" placeholder="First Name"
+                                                       class="form-control here" type="text">
                                             </div>
-                                            <div class="form-group row">
-                                                <label for="lastname" class="col-4 col-form-label"> <i
-                                                        class="fa fa-user"></i> Last Name</label>
-                                                <div class="col-8">
-                                                    <input id="lastname" name="lastname" placeholder="Last Name"
-                                                           class="form-control here" type="text">
-                                                </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="lastname" class="col-4 col-form-label"> <i
+                                                    class="fa fa-user"></i> Last Name</label>
+                                            <div class="col-8">
+                                                <input id="lastname" name="lastname" placeholder="Last Name"
+                                                       class="form-control here" type="text">
                                             </div>
-                                            <div class="form-group row">
-                                                <label for="email" class="col-4 col-form-label"> <i
-                                                        class="fa fa-at"></i>
-                                                    Email*</label>
-                                                <div class="col-8">
-                                                    <input id="email" name="email" placeholder="Email"
-                                                           class="form-control here" required="required" type="text"
-                                                           disabled>
-                                                </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="email" class="col-4 col-form-label"> <i
+                                                    class="fa fa-at"></i>
+                                                Email*</label>
+                                            <div class="col-8">
+                                                <input id="email" name="email" placeholder="Email"
+                                                       class="form-control here" required="required" type="text"
+                                                       disabled>
                                             </div>
-                                            <div class="form-group row">
-                                                <label for="newpass" class="col-4 col-form-label"> <i
-                                                        class="fa fa-asterisk"></i> New Password</label>
-                                                <div class="col-8">
-                                                    <input type="password" id="newpass" name="newpass"
-                                                           placeholder="New Password" class="form-control here"
-                                                           type="text">
-                                                </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="newpass" class="col-4 col-form-label"> <i
+                                                    class="fa fa-asterisk"></i> New Password</label>
+                                            <div class="col-8">
+                                                <input type="password" id="newpass" name="newpass"
+                                                       placeholder="New Password" class="form-control here"
+                                                       type="text">
                                             </div>
-                                            <br>
+                                        </div>
+                                        <br>
 
 
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <h4>
-                                                        <i class="fa fa-plus-circle"></i>
-                                                        Additional Info
-                                                    </h4>
-                                                </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h4>
+                                                    <i class="fa fa-plus-circle"></i>
+                                                    Additional Info
+                                                </h4>
                                             </div>
-                                            <hr>
-                                            <br>
-                                            <div class="form-group row">
-                                                <label for="facebook" class="col-4 col-form-label"><i
-                                                        class="fa fa-facebook-official"></i> Facebook</label>
-                                                <div class="col-8">
-                                                    <input id="facebook" name="facebook"
-                                                           placeholder="facebook profile link"
-                                                           class="form-control here" type="text">
-                                                </div>
+                                        </div>
+                                        <hr>
+                                        <br>
+                                        <div class="form-group row">
+                                            <label for="facebook" class="col-4 col-form-label"><i
+                                                    class="fa fa-facebook-official"></i> Facebook</label>
+                                            <div class="col-8">
+                                                <input id="facebook" name="facebook"
+                                                       placeholder="facebook profile link"
+                                                       class="form-control here" type="text">
                                             </div>
-                                            <div class="form-group row">
-                                                <label for="instagram" class="col-4 col-form-label"> <i
-                                                        class="fa fa-instagram"></i> Instagram</label>
-                                                <div class="col-8">
-                                                    <input id="instagram" name="instagram"
-                                                           placeholder="instagram profile link"
-                                                           class="form-control here"
-                                                           type="text">
-                                                </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="instagram" class="col-4 col-form-label"> <i
+                                                    class="fa fa-instagram"></i> Instagram</label>
+                                            <div class="col-8">
+                                                <input id="instagram" name="instagram"
+                                                       placeholder="instagram profile link"
+                                                       class="form-control here"
+                                                       type="text">
                                             </div>
-                                            <div class="form-group row">
-                                                <label for="twitter" class="col-4 col-form-label"><i
-                                                        class="fa fa-twitter-square"></i> Twitter</label>
-                                                <div class="col-8">
-                                                    <input id="twitter" name="twitter"
-                                                           placeholder="twitter profile link"
-                                                           class="form-control here" type="text">
-                                                </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="twitter" class="col-4 col-form-label"><i
+                                                    class="fa fa-twitter-square"></i> Twitter</label>
+                                            <div class="col-8">
+                                                <input id="twitter" name="twitter"
+                                                       placeholder="twitter profile link"
+                                                       class="form-control here" type="text">
                                             </div>
-                                            <div class="form-group row">
-                                                <label for="publicinfo" class="col-4 col-form-label"> <i
-                                                        class="fa fa-globe"></i> Public Info</label>
-                                                <div class="col-8">
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="publicinfo" class="col-4 col-form-label"> <i
+                                                    class="fa fa-globe"></i> Public Info</label>
+                                            <div class="col-8">
                                                 <textarea id="publicinfo" name="publicinfo" cols="40" rows="4"
                                                           class="form-control"></textarea>
-                                                </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="offset-4 col-8">
-                                                    <button name="submit" type="submit"
-                                                            class="btn btn-primary update_button"><i
-                                                            class="fa fa-edit"></i>
-                                                        Update My Profile
-                                                    </button>
-                                                </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="offset-4 col-8">
+                                                <button name="submit" type="submit"
+                                                        class="btn btn-primary update_button"><i
+                                                        class="fa fa-edit"></i>
+                                                    Update My Profile
+                                                </button>
                                             </div>
+                                        </div>
 
-                                        </form>
-                                    </div>
+                                    </form>
                                 </div>
-
                             </div>
+
                         </div>
                     </div>
-                    <div class="tab-pane" id="tab2">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h4>
-                                            <i class="fa fa-briefcase"></i>
-                                            Projects
-                                        </h4>
-                                        <hr>
-                                        <h5>
-                                            <i class="fa fa-codepen"></i>
-                                            In total you've got {{ user_projects.count }} projects
-                                        </h5>
-                                        <hr>
+                </div>
+                <div class="tab-pane" id="tab2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4>
+                                        <i class="fa fa-briefcase"></i>
+                                        Projects
+                                    </h4>
+                                    <hr>
+                                    <h5>
+                                        <i class="fa fa-codepen"></i>
+                                        In total you've got {{ user_projects.count }} projects
+                                    </h5>
+                                    <hr>
 
 
-                                        <!--Display user projects -->
+                                    <!--Display user projects -->
 
-                                        <div class="row">
+                                    <div class="row">
 
-                                            {% for project in user_projects %}
-                                                <div class="col-lg-6 col-md-6">
-                                                    <div class="single_cause">
-                                                        <h4><i class="fa fa-hashtag"></i> <a
-                                                                href="#"> </a>{{ project.title }}</h4></a>
-                                                        <div class="thumb">
-                                                            <img src="/media/{{ project.images.first }}" width="300px"
-                                                                 height="208" alt="">
-                                                        </div>
-                                                        <div class="causes_content">
-                                                            <div class="custom_progress_bar">
-                                                                <div class="progress">
-                                                                    <div class="progress-bar" role="progressbar"
-                                                                         style="width: {{ project.donations.all | total_amount |total_amount_percent:project.total }}%;"
-                                                                         aria-valuenow="30" aria-valuemin="0"
-                                                                         aria-valuemax="100">
+                                        {% for project in user_projects %}
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="single_cause">
+                                                <h4><i class="fa fa-hashtag"></i> <a
+                                                        href="#"> </a>{{ project.title }}</h4></a>
+                                                <div class="thumb">
+                                                    <img src="/media/{{ project.images.first }}" width="300px"
+                                                         height="208" alt="">
+                                                </div>
+                                                <div class="causes_content">
+                                                    <div class="custom_progress_bar">
+                                                        <div class="progress">
+                                                            <div class="progress-bar" role="progressbar"
+                                                                 style="width: {{ project.donations.all | total_amount |total_amount_percent:project.total }}%;"
+                                                                 aria-valuenow="30" aria-valuemin="0"
+                                                                 aria-valuemax="100">
                                                             <span class="progres_count">
                                                                 {{ project.donations.all | total_amount |total_amount_percent:project.total }}%
                                                             </span>
-                                                                    </div>
-                                                                </div>
                                                             </div>
-                                                            <div class="balance d-flex justify-content-between align-items-center">
-                                                                <span>Raised: ${{ project.donations.all | total_amount }} </span>
-                                                                <span>Goal: ${{ project.total }} </span>
-                                                            </div>
-                                                            {% ratings project icon_width=15 %}
-
-                                                            <p>{{ project.desc|truncatewords:20 }}</p>
-                                                            <a class="read_more"
-                                                               href="{% url "projects.show" project.slug %}">Read
-                                                                More</a>
                                                         </div>
                                                     </div>
+                                                    <div class="balance d-flex justify-content-between align-items-center">
+                                                        <span>Raised: ${{ project.donations.all | total_amount }} </span>
+                                                        <span>Goal: ${{ project.total }} </span>
+                                                    </div>
+                                                    {% ratings project icon_width=15 %}
+
+                                                    <p>{{ project.desc|truncatewords:20 }}</p>
+                                                    <a class="read_more"
+                                                       href="{% url " projects.show" project.slug %}">Read
+                                                    More</a>
                                                 </div>
-                                                <hr>
-                                                <br>
-                                            {% endfor %}
-
+                                            </div>
                                         </div>
-
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane" id="tab3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h4>
-                                            <i class="fa fa-credit-card"></i>
-                                            Donations
-                                        </h4>
                                         <hr>
-                                        <div class="row">
+                                        <br>
+                                        {% endfor %}
 
-                                            {% for project in donations %}
-                                                <div class="col-lg-6 col-md-6">
-                                                    <div class="single_cause">
-                                                        <h4><i class="fa fa-hashtag"></i> <a
-                                                                href="#"> </a>{{ project.title }}</h4></a>
-                                                        <div class="thumb">
-                                                            <img src="/media/{{ project.images.first }}" width="300px"
-                                                                 height="208" alt="">
-                                                        </div>
-                                                        <div class="causes_content">
-                                                            <div class="custom_progress_bar">
-                                                                <div class="progress">
-                                                                    <div class="progress-bar" role="progressbar"
-                                                                         style="width: {{ project.donations.all | total_amount |total_amount_percent:project.total }}%;"
-                                                                         aria-valuenow="30" aria-valuemin="0"
-                                                                         aria-valuemax="100">
-                                                            <span class="progres_count">
-                                                                {{ project.donations.all | total_amount |total_amount_percent:project.total }}%
-                                                            </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="balance d-flex justify-content-between align-items-center">
-                                                                <span>Raised: ${{ project.donations.all | total_amount }} </span>
-                                                                <span>Goal: ${{ project.total }} </span>
-                                                            </div>
-                                                            {% ratings project icon_width=15 %}
-
-                                                            <p>{{ project.desc|truncatewords:20 }}</p>
-                                                            <a class="read_more"
-                                                               href="{% url "projects.show" project.slug %}">Read
-                                                                More</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <br>
-                                            {% empty %}
-                                                <h3>You do not have donations for now!</h3>
-                                            {% endfor %}
-
-                                        </div>
                                     </div>
+
+
                                 </div>
-
-
                             </div>
+
                         </div>
                     </div>
                 </div>
 
 
+                <div class="tab-pane" id="tab3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4>
+                                        <i class="fa fa-credit-card"></i>
+                                        Donations
+                                    </h4>
+                                    <hr>
+                                    <div class="row">
+
+                                        {% for project in donations %}
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="single_cause">
+                                                <h4><i class="fa fa-hashtag"></i> <a
+                                                        href="#"> </a>{{ project.title }}</h4></a>
+                                                <div class="thumb">
+                                                    <img src="/media/{{ project.images.first }}" width="300px"
+                                                         height="208" alt="">
+                                                </div>
+                                                <div class="causes_content">
+                                                    <div class="custom_progress_bar">
+                                                        <div class="progress">
+                                                            <div class="progress-bar" role="progressbar"
+                                                                 style="width: {{ project.donations.all | total_amount |total_amount_percent:project.total }}%;"
+                                                                 aria-valuenow="30" aria-valuemin="0"
+                                                                 aria-valuemax="100">
+                                                                >>>>>>> c175963f7f25a94d8d3bb57bf0c9f6127fa5e2e0
+                                                                <span class="progres_count">
+                                                                {{ project.donations.all | total_amount |total_amount_percent:project.total }}%
+                                                            </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="balance d-flex justify-content-between align-items-center">
+                                                        <span>Raised: ${{ project.donations.all | total_amount }} </span>
+                                                        <span>Goal: ${{ project.total }} </span>
+                                                    </div>
+                                                    {% ratings project icon_width=15 %}
+
+                                                    <p>{{ project.desc|truncatewords:20 }}</p>
+                                                    <a class="read_more"
+                                                       href="{% url " projects.show" project.slug %}">Read
+                                                    More</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <br>
+                                        {% empty %}
+                                        <h3>You do not have donations for now!</h3>
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
         </div>
+    </div>
 
 
-    </div>
-    </div>
-    </div>
+</div>
+</div>
+</div>
 
 
 {% endblock %}

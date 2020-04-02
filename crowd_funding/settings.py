@@ -101,12 +101,18 @@ WSGI_APPLICATION = 'crowd_funding.wsgi.application'
 #     }
 # }
 
+AUTHENTICATION_BACKENDS = [
+'social_core.backends.facebook.FacebookOAuth2',
+'django.contrib.auth.backends.ModelBackend',
+]
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'crowd_funding',
-        'USER': 'root',
-        'PASSWORD': 'root',
+        'USER': 'jaxon',
+        'PASSWORD': 'django',
         'HOST': '127.0.0.1',
         'PORT': '3306'
     }
