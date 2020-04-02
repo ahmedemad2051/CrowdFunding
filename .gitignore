@@ -8,3 +8,4 @@ images
 projects/migrations/*.py
 users/migrations/*.py
 users/static/users/css/profile.css~
+crowd_funding/settings.py~

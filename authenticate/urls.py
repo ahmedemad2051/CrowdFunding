@@ -1,23 +1,18 @@
 from django.urls import path, include
-from authenticate import views
-from django.contrib.auth.views import LoginView
-from django.contrib.auth import views as auth_views
+from django.conf.urls import url
+from allauth.account.views import ConfirmEmailView
+from . import views
 
 urlpatterns = [
-    # path('login', LoginView.as_view(template_name='authenticate/login.html'), name='auth.login'),
+    url(r'^registration/account-email-verification-sent/', views.null_view, name='account_email_verification_sent'),
+    url(r'^registration/account-confirm-email/(?P<key>[-:\w]+)/$', ConfirmEmailView.as_view(),
+        name='account_confirm_email'),
+    url(r'^registration/complete/$', views.complete_view, name='account_confirm_complete'),
+    url(r'^password-reset/confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        views.null_view, name='password_reset_confirm'),
+    url(r'', include('rest_auth.urls')),
+    url(r'^registration/', include('rest_auth.registration.urls')),
     path('social-auth/', include('social_django.urls', namespace="social")),
-    # path('login', views.login_user),
-    # path('logout', views.logout_user, name='auth.logout'),
     path('register/', views.register, name='register'),
-
+    path('activate/<str:token>', views.activate, name="auth.activate"),
 ]
-
-
-# accounts/login/ [name='login']
-# accounts/logout/ [name='logout']
-# accounts/password_change/ [name='password_change']
-# accounts/password_change/done/ [name='password_change_done']
-# accounts/password_reset/ [name='password_reset']
-# accounts/password_reset/done/ [name='password_reset_done']
-# accounts/reset/<uidb64>/<token>/ [name='password_reset_confirm']
-# accounts/reset/done/ [name='password_reset_complete']

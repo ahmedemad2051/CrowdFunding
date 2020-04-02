@@ -1,4 +1,5 @@
 {% load static %}
+{% load latest_projects %}
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -127,15 +128,13 @@
                             <li><a href="#">Sponsor</a></li>
                             <li><a href="#">Fundraise</a></li>
                             <li><a href="#">Volunteer</a></li>
-                            <li><a href="#">Partner</a></li>
-                            <li><a href="#">Jobs</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6 col-lg-3">
                     <div class="footer_widget">
                         <h3 class="footer_title">
-                            Contacts
+                            Contact Us
                         </h3>
                         <div class="contacts">
                             <p>+2(305) 587-3407 <br>
@@ -149,55 +148,25 @@
                 <div class="col-xl-3 col-md-6 col-lg-3">
                     <div class="footer_widget">
                         <h3 class="footer_title">
-                            Top News
+                            Latest Projects
                         </h3>
                         <ul class="news_links">
                             <li>
-                                <div class="thumb">
-                                    <a href="#">
-                                        <img src="/static/layout/img/news/news_1.png" alt="">
-                                    </a>
-                                </div>
                                 <div class="info">
-                                    <a href="#">
-                                        <h4>School for African
-                                            Childrens</h4>
-                                    </a>
-                                    <span>Jun 12, 2019</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="thumb">
-                                    <a href="#">
-                                        <img src="/static/layout/img/news/news_2.png" alt="">
-                                    </a>
-                                </div>
-                                <div class="info">
-                                    <a href="#">
-                                        <h4>School for African
-                                            Childrens</h4>
-                                    </a>
-                                    <span>Jun 12, 2019</span>
-                                </div>
+                                {% latest_projects as latest_projects %}
+                                    {% for project in latest_projects %}
+                                        <div class="col-lg-4 col-md-6">
+                                            <h4><a href="{% url 'projects.show' project.slug %}">{{ project.title }}</a> </h4>
+                                            <div class="thum_1">
+                                                <img src="/media/{{ project.images.first }}" width="190px"
+                                                     height="120px" alt="">
+                                            </div>
+                                            <hr>
+                                        </div>
+                                    {% endfor %}
                             </li>
                         </ul>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="copy-right_text">
-        <div class="container">
-            <div class="row">
-                <div class="bordered_1px "></div>
-                <div class="col-xl-12">
-                    <p class="copy_right text-center">
-                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;<script>document.write(new Date().getFullYear());</script>
-                        All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by
-                        <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                    </p>
                 </div>
             </div>
         </div>
