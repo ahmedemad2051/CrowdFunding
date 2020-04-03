@@ -28,6 +28,8 @@
 
             <img class="d-block w-100 img_size" src="/media/{{ project.images.first }}" alt="First slide">
         </div>
+         {% empty %}
+        <h3>You do not have projects for now!</h3>
         {% endfor %}
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -84,7 +86,7 @@
                 </div>
             </div>
             {% empty %}
-             <h3>You do not have donations for now!</h3>
+             <h3>You do not have projects for now!</h3>
             {% endfor %}
 
             <!-- latest_activites_area_end  -->
@@ -140,7 +142,7 @@
                             </div>
                         </div>
                         {% empty %}
-                        <h3>You do not have donations for now!</h3>
+                        <h3>You do not have projects for now!</h3>
                         {% endfor %}
 
                     </div>
@@ -183,7 +185,7 @@
                                     </div>
                                 </div>
                                 {% empty %}
-                                <h3>You do not have donations for now!</h3>
+                                <h3>You do not have projects for now!</h3>
                                 {% endfor %}
                                 <!-- Carousel controls -->
                                 <a class="carousel-control left carousel-control-prev" href="#myCarousel"
