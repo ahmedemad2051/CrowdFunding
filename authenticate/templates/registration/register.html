@@ -1,5 +1,11 @@
 {% extends "layout/base.html" %}
 {% load crispy_forms_tags %}
+
+{% block bradcam_text %}
+Register Now
+{% endblock %}
+
+
 {% block content %}
 <div class="container">
     <form method="POST">
@@ -15,7 +21,7 @@
 
     <div>
         <small>
-            Already Have An Account? <a href="{{ authenticate.views.login }}">Sign In</a>
+            Already Have An Account? <a href="#">Sign In</a>
         </small>
     </div>
 </div>

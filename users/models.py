@@ -49,6 +49,10 @@ class Account(AbstractBaseUser):
     last_name = models.CharField(max_length=30)
     mobile = models.CharField(max_length=20)
     profile_picture = models.ImageField()
+    facebook = models.URLField(max_length=200)
+    instagram = models.URLField(max_length=200)
+    twitter = models.URLField(max_length=200)
+    public_info = models.TextField()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
@@ -56,7 +60,7 @@ class Account(AbstractBaseUser):
     objects = CFAccountManager()
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        return self.email
 
     def has_perm(self, perm, obj=None):
         return self.is_admin
