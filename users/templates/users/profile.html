@@ -3,13 +3,11 @@
 {% load ratings %}
 {% block styles %}
 <link rel="stylesheet" href="/static/users/css/profile.css">
+<link rel="stylesheet" href="/static/projects/css/sweetalert2.min.css">
+
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Baloo+Thambi+2:600&display=swap" rel="stylesheet">
-{% endblock %}
-
-{% block scripts %}
-
 {% endblock %}
 
 {% block bradcam_text %}
@@ -48,7 +46,7 @@ Profile
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <form>
+                                    <form action="#" method="get">
                                         <div class="form-group row">
                                             <label for="username" class="col-4 col-form-label"> <i
                                                     class="fa fa-hashtag"></i> User Name*</label>
@@ -144,11 +142,20 @@ Profile
                                         </div>
                                         <div class="form-group row">
                                             <div class="offset-4 col-8">
-                                                <button name="submit" type="submit"
-                                                        class="btn btn-primary update_button"><i
-                                                        class="fa fa-edit"></i>
+                                                <button name="submit" type="submit" class="btn btn-primary update_button"><i class="fa fa-edit"></i>
                                                     Update My Profile
                                                 </button>
+
+                                                <br>
+                                                <hr>
+                                                <a class="btn btn-danger" href="{% url 'delete_profile' %}" id="delete_profile"> 
+                                                    <span title="Edit">
+                                                        <i class="fa fa-user-times" aria-hidden="true"></i>
+                                                      </span>
+                                                    <i class="fa user-times"></i> Delete account
+                                                
+                                                </a>
+
                                             </div>
                                         </div>
 
@@ -259,8 +266,8 @@ Profile
                                                         <div class="progress">
                                                             <div class="progress-bar" role="progressbar"
                                                                  style="width: {{ project.donations.all | total_amount |total_amount_percent:project.total }}%;"
-                                                                 aria-valuenow="30" aria-valuemin="0"
-                                                                 aria-valuemax="100"
+                                                                 aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
+
                                                                 <span class="progres_count">
                                                                 {{ project.donations.all | total_amount |total_amount_percent:project.total }}%
                                                             </span>
@@ -283,7 +290,7 @@ Profile
                                         <hr>
                                         <br>
                                         {% empty %}
-                                        <h3>You do not have donations for now!</h3>
+                                        <h3> Currently you don't have any donations !</h3>
                                         {% endfor %}
 
                                     </div>
@@ -306,4 +313,26 @@ Profile
 </div>
 
 
+{% endblock %}
+
+{% block scripts %}
+    <script src="/static/projects/js/sweetalert2.min.js"></script>
+    <script>
+            $(document).on("click", "#delete_profile", function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Are you sure to delete your account?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, do it!'
+                }).then((result) => {
+                    if (result.value) {
+                        location.href = "{% url 'delete_profile' %}";
+                    }
+                })
+            });
+    </script>
 {% endblock %}

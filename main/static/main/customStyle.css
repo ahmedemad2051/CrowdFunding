@@ -1,3 +1,12 @@
+*{
+	font-family: 'Open Sans', sans-serif;
+}
+
+h3, h4, h5{
+    font-family: 'Baloo Thambi 2', cursive;
+    color: #14565E;
+}
+
 .img_size{
   height: 600px;
 }
