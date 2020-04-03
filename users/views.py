@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from projects.models import Image, Project, Comment, Donation
 from users.models import Account
+from .forms import UserRegisterationForm
+
 
 # Create your views here.
 @login_required
@@ -12,31 +15,18 @@ def profile(request):
     donations = Project.objects.filter(donations__user=request.user)  # get user projects
 
     user_obj = Account.objects.get(email=request.user)
-
-    email = getattr(user_obj, 'email')
-    username = getattr(user_obj, 'username')
-    first_name = getattr(user_obj, 'first_name')
-    last_name = getattr(user_obj, 'last_name')
-    mobile = getattr(user_obj, 'mobile')
-    profile_picture = getattr(user_obj, 'profile_picture')
-    facebook = getattr(user_obj, 'facebook')
-    instagram = getattr(user_obj, 'instagram')
-    twitter = getattr(user_obj, 'twitter')
-    public_info = getattr(user_obj, 'public_info')
+    user = UserRegisterationForm(request.POST or None, instance=user_obj)
+    if request.POST:
+        if user.is_valid():
+            user.save()
+            messages.success(request, "Profile Updated Successfully!")
+        else:
+            messages.error(request, "Failed to update profile!")
 
     context['user_projects'] = user_projects
     context['donations'] = donations
-
-    context['email'] = email
-    context['username'] = username
-    context['first_name'] = first_name
-    context['last_name'] = last_name
-    context['mobile'] = mobile
-    context['profile_picture'] = profile_picture
-    context['facebook'] = facebook
-    context['instagram'] = instagram
-    context['twitter'] = twitter
-    context['public_info'] = public_info
-
+    context['user'] = user
+    context['email'] = request.user
     return render(request, "users/profile.html", context)
+
 

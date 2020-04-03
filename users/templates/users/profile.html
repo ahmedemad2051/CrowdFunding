@@ -1,5 +1,6 @@
 {% extends "layout/base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% load total_amount %}
 {% load ratings %}
 {% block styles %}
@@ -50,79 +51,29 @@ Profile
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <form>
-                                        <div class="form-group row">
-                                            <label for="username" class="col-4 col-form-label"> <i
-                                                    class="fa fa-hashtag"></i> User Name*</label>
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <div class="col-8">
+                                            {{ user.username|as_crispy_field }}
+                                        </div>
+                                        <div class="col-8">
+                                           {{ user.first_name|as_crispy_field }}
+                                        </div>
+                                        <div class="col-8">
+                                           {{ user.last_name|as_crispy_field }}
+                                        </div>
+
+                                        <div>
+                                            <label for="email" class="col-4 col-form-label">Email*</label>
                                             <div class="col-8">
-                                                <input id="username" name="username" placeholder="Username"
+                                                <input id="email" name="email"
                                                        class="form-control here" required="required" type="text"
-                                                       value="{{ username }}">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="name" class="col-4 col-form-label"> <i
-                                                    class="fa fa-user"></i>
-                                                First Name</label>
-                                            <div class="col-8">
-                                                <input id="name" name="name" placeholder="First Name"
-                                                       class="form-control here" type="text"
-                                                        value="{{ first_name }}">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="lastname" class="col-4 col-form-label"> <i
-                                                    class="fa fa-user"></i> Last Name</label>
-                                            <div class="col-8">
-                                                <input id="lastname" name="lastname" placeholder="Last Name"
-                                                       class="form-control here" type="text"
-                                                        value="{{ last_name }}">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="email" class="col-4 col-form-label"> <i
-                                                    class="fa fa-at"></i>
-                                                Email*</label>
-                                            <div class="col-8">
-                                                <input id="email" name="email" placeholder="Email"
-                                                       class="form-control here" required="required" type="text"
-                                                       value="{{ email }}"
-                                                       disabled>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="form-group row">
-                                            <label for="currentpass" class="col-4 col-form-label"> <i
-                                                    class="fa fa-asterisk"></i> Current Password</label>
-                                            <div class="col-8">
-                                                <input type="password" id="currentpass" name="currentpass"
-                                                       placeholder="Current Password" class="form-control here"
-                                                       type="text">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="form-group row">
-                                            <label for="newpass" class="col-4 col-form-label"> <i
-                                                    class="fa fa-asterisk"></i> New Password</label>
-                                            <div class="col-8">
-                                                <input type="password" id="newpass" name="newpass"
-                                                       placeholder="New Password" class="form-control here"
-                                                       type="text">
-                                            </div>
-                                        </div>
-                                        <br>
-
-                                        <div class="form-group row">
-                                            <label for="confirmpass" class="col-4 col-form-label"> <i
-                                                    class="fa fa-asterisk"></i> Confirm Password</label>
-                                            <div class="col-8">
-                                                <input type="password" id="confirmpass" name="confirmpass"
-                                                       placeholder="Confirm Password" class="form-control here"
-                                                       type="text">
+                                                       disabled value="{{ email }}">
                                             </div>
                                         </div>
 
-
+                                         <br>
+                                        <br>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <h4>
@@ -131,50 +82,26 @@ Profile
                                                 </h4>
                                             </div>
                                         </div>
-                                        <hr>
-                                        <br>
-                                        <div class="form-group row">
-                                            <label for="facebook" class="col-4 col-form-label"><i
-                                                    class="fa fa-facebook-official"></i> Facebook</label>
-                                            <div class="col-8">
-                                                <input id="facebook" name="facebook"
-                                                       placeholder="facebook profile link"
-                                                       class="form-control here" type="text"
-                                                        value="{{ facebook }}">
-                                            </div>
+                                    <hr>
+                                        <div class="col-8">
+                                            {{ user.facebook|as_crispy_field }}
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="instagram" class="col-4 col-form-label"> <i
-                                                    class="fa fa-instagram"></i> Instagram</label>
-                                            <div class="col-8">
-                                                <input id="instagram" name="instagram"
-                                                       placeholder="instagram profile link"
-                                                       class="form-control here"
-                                                       type="text"
-                                                        value="{{ instagram }}">
-                                            </div>
+
+                                        <div class="col-8">
+                                            {{ user.instagram|as_crispy_field }}
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="twitter" class="col-4 col-form-label"><i
-                                                    class="fa fa-twitter-square"></i> Twitter</label>
-                                            <div class="col-8">
-                                                <input id="twitter" name="twitter"
-                                                       placeholder="twitter profile link"
-                                                       class="form-control here" type="text"
-                                                        value="{{ twitter }}">
-                                            </div>
+
+                                        <div class="col-8">
+                                            {{ user.twitter|as_crispy_field }}
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="publicinfo" class="col-4 col-form-label"> <i
-                                                    class="fa fa-globe"></i> Public Info</label>
-                                            <div class="col-8">
-                                                <textarea id="publicinfo" name="publicinfo" cols="40" rows="4"
-                                                          class="form-control" value="{{ public_info }}"></textarea>
-                                            </div>
+
+                                        <div class="col-8">
+                                            {{ user.public_info|as_crispy_field }}
                                         </div>
+
                                         <div class="form-group row">
                                             <div class="offset-4 col-8">
-                                                <button name="submit" type="submit"
+                                                <button id="btn-update" name="submit" type="submit"
                                                         class="btn btn-primary update_button"><i
                                                         class="fa fa-edit"></i>
                                                     Update My Profile
