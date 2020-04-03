@@ -3,7 +3,8 @@
 {% load ratings %}
 
 {% block bradcam_text %}
-   {% if category %} {{ category }} / {% endif %}Campaigns
+   {% if category %} {{ category }} / {% endif %}
+    {% if q %}} {{ q }} / {% endif %}Campaigns
 {% endblock %}
 
 {% block content %}

@@ -25,13 +25,6 @@
             <img class="d-block w-100 img_size" src="/media/{{ project.images.first }}" alt="First slide">
         </div>
         {% endfor %}
-        <!--            <div class="carousel-item">-->
-        <!--                <img class="d-block w-100 img_size" src="{% static 'layout/img/banner/man.png' %}" alt="Second slide">-->
-        <!--            </div>-->
-        <!--            <div class="carousel-item">-->
-        <!--                <img class="d-block w-100 img_size" src="{% static 'layout/img/banner/bradcam.png' %}"-->
-        <!--                     alt="Third slide">-->
-        <!--            </div>-->
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -44,9 +37,16 @@
 </div>
 
 <!-- slider_area_end -->
+
+
+
+
 {% endblock %}
 
 {% block content %}
+<form action="{% url 'projects.all' %}?search={{project.name}}" method="GET">
+<input name="q" class="form-control" type="text" placeholder="Search" aria-label="Search">
+</form>
 
 <!-- reson_area_start  -->
 <div class="reson_area section_padding">
@@ -133,9 +133,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                         <div class="section_title text-center mb-55">
-                                <h3><span>Categories</span></h3>
-                            </div>
+                        <div class="section_title text-center mb-55">
+                            <h3><span>Categories</span></h3>
+                        </div>
                         <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
 
                             <!-- Wrapper for carousel items -->
@@ -147,8 +147,9 @@
                                         <div class="col-lg-3">
                                             <div class="thumb-wrapper">
                                                 <div class="img-box">
-                                                    <a href="{% url 'projects.all' %}?category={{project.name}}"><img src="/media/{{ project.image }}"
-                                                         class="img-responsive img-fluid" alt=""></a>
+                                                    <a href="{% url 'projects.all' %}?category={{project.name}}"><img
+                                                            src="/media/{{ project.image }}"
+                                                            class="img-responsive img-fluid" alt=""></a>
                                                 </div>
                                                 <div class="thumb-content">
                                                     <h4>{{ project.name }}</h4>
@@ -192,28 +193,31 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="single_volenteer">
                                 <div class="volenteer_thumb">
-                                    <img src="/static/layout/img/volenteer/1.png" alt="">
+                                    <img src="/static/layout/img/volenteer/4.jpeg" alt="">
                                 </div>
                                 <div class="voolenteer_info d-flex align-items-end">
                                     <div class="social_links">
                                         <ul>
                                             <li>
-                                                <a href="#"> <i class="fa fa-facebook"></i> </a>
+                                                <a href="https://www.facebook.com/mohamedsalah1020"> <i
+                                                        class="fa fa-facebook"></i> </a>
                                             </li>
                                             <li>
                                                 <a href="#"> <i class="fa fa-pinterest"></i> </a>
                                             </li>
                                             <li>
-                                                <a href="#"> <i class="fa fa-linkedin"></i> </a>
+                                                <a href="https://www.linkedin.com/in/mohamedabokhadra/"> <i
+                                                        class="fa fa-linkedin"></i> </a>
                                             </li>
                                             <li>
-                                                <a href="#"> <i class="fa fa-twitter"></i> </a>
+                                                <a href="https://twitter.com/Abokhadra2030"> <i
+                                                        class="fa fa-twitter"></i> </a>
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="info_inner">
-                                        <h4>Sakil khan</h4>
-                                        <p>Donner</p>
+                                        <h4>Mohamed Salah</h4>
+
                                     </div>
                                 </div>
                             </div>
