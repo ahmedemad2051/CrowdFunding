@@ -5,34 +5,61 @@
 {% load ratings %}
 
 {% block styles %}
-    <link rel="stylesheet" href="/static/projects/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/projects/css/customStyle.css">
-    <link rel="stylesheet" href="/static/projects/css/comments.css">
-    <link rel="stylesheet" href="/static/projects/css/sweetalert2.min.css">
+<link rel="stylesheet" href="/static/projects/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/projects/css/customStyle.css">
+<link rel="stylesheet" href="/static/projects/css/comments.css">
+<link rel="stylesheet" href="/static/projects/css/sweetalert2.min.css">
 {% endblock %}
 
 
 {% block bradcam_text %}
-    <a href="">{{ project.category }}</a>/{{ project.title }}
+<a href="">{{ project.category }}</a>/{{ project.title }}
 {% endblock %}
 
 {% block content %}
 
-    {% total_amount project.donations.all as all_donations %}
-    {% total_amount_percent all_donations project.total as donations_percentage %}
-    <!-- popular_causes_area_start  -->
-    <div class="popular_causes_area pt-120 cause_details ">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12">
-                    {% if not project.enable %}
-                        <div class="alert alert-danger text-center" role="alert">
-                            Campaign cancelled by the owner!
-                        </div>
-                    {% endif %}
-                    <div class="single_cause">
-                        <div class="thumb">
-                            <img src="/media/{{ project.images.first }}" alt="">
+{% total_amount project.donations.all as all_donations %}
+{% total_amount_percent all_donations project.total as donations_percentage %}
+<!-- popular_causes_area_start  -->
+<div class="popular_causes_area pt-120 cause_details ">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                {% if not project.enable %}
+                <div class="alert alert-danger text-center" role="alert">
+                    Campaign cancelled by the owner!
+                </div>
+                {% endif %}
+                <div class="single_cause">
+                    <div class="thumb">
+                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                            </ol>
+
+                            <div class="carousel-inner">
+                                {% for image in project.images.all %}
+                                <div class="carousel-item {% if forloop.first %} active {% endif %}">
+
+                                    <img class="d-block w-100 img_size" src="/media/{{ image }}">
+                                </div>
+                                {% empty %}
+                                <h3>You do not have projects for now!</h3>
+                                {% endfor %}
+
+                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+                                   data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+                                   data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
                         </div>
                         <div class="causes_content">
                             <div class="custom_progress_bar">
@@ -55,26 +82,27 @@
                             <h4>{{ project.title }}</h4>
                             <p>{{ project.desc }}</p>
                             {% if project.owner != user %}
-                                <button class="genric-btn primary small add_report"
-                                        data-report-for="{{ project.id }}" data-report-type="project">Report
-                                </button>
+                            <button class="genric-btn primary small add_report"
+                                    data-report-for="{{ project.id }}" data-report-type="project">Report
+                            </button>
                             {% else %}
-                                <a class="genric-btn primary small " href="{% url 'projects.update' project.slug %}">Edit</a>
-                                {% if project.enable and donations_percentage < 25 %}
-                                    <a class="genric-btn primary small " id="cancel_project" href="#">Cancel</a>
-                                {% endif %}
+                            <a class="genric-btn primary small "
+                               href="{% url 'projects.update' project.slug %}">Edit</a>
+                            {% if project.enable and donations_percentage < 25 %}
+                            <a class="genric-btn primary small " id="cancel_project" href="#">Cancel</a>
+                            {% endif %}
                             {% endif %}
                             {% if project.tags.count %}
-                                <div class="extra_item">
-                                    <div class="item-content-block">
-                                        <div class="block-title">Tags</div>
-                                    </div>
-                                    <div class="item-content-block extra_tags">
-                                        {% for tag in project.tags.all %}
-                                            <a href="#">{{ tag }}</a>
-                                        {% endfor %}
-                                    </div>
+                            <div class="extra_item">
+                                <div class="item-content-block">
+                                    <div class="block-title">Tags</div>
                                 </div>
+                                <div class="item-content-block extra_tags">
+                                    {% for tag in project.tags.all %}
+                                    <a href="#">{{ tag }}</a>
+                                    {% endfor %}
+                                </div>
+                            </div>
                             {% endif %}
                         </div>
                     </div>
@@ -85,83 +113,83 @@
     <!-- popular_causes_area_end  -->
 
     {% if all_donations < project.total and project.owner != user %}
-        <div class="make_donation_area section_padding">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-6">
-                        <div class="section_title text-center mb-55">
-                            <h3><span>Make a Donation</span></h3>
-                        </div>
+    <div class="make_donation_area section_padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title text-center mb-55">
+                        <h3><span>Make a Donation</span></h3>
                     </div>
                 </div>
-                <form action="{% url 'projects.add_donations' %}" method="post" class="donation_form">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-6">
+            </div>
+            <form action="{% url 'projects.add_donations' %}" method="post" class="donation_form">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
 
-                            {% csrf_token %}
-                            <input type="hidden" name="project" value="{{ project.slug }}">
-                            <div class="row align-items-center">
-                                <div class="col-md-12">
-                                    <div class="single_amount">
-                                        <div class="input_field">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="basic-addon1">$</span>
-                                                </div>
-                                                <input type="number" class="form-control" name="amount" value="100"
-                                                       placeholder="40,200"
-                                                       aria-label="Username" aria-describedby="basic-addon1">
+                        {% csrf_token %}
+                        <input type="hidden" name="project" value="{{ project.slug }}">
+                        <div class="row align-items-center">
+                            <div class="col-md-12">
+                                <div class="single_amount">
+                                    <div class="input_field">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">$</span>
                                             </div>
+                                            <input type="number" class="form-control" name="amount" value="100"
+                                                   placeholder="40,200"
+                                                   aria-label="Username" aria-describedby="basic-addon1">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="donate_now_btn text-center">
-                                <button type="submit" class="boxed-btn4">Donate Now</button>
-                            </div>
                         </div>
 
                     </div>
-                </form>
-            </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="donate_now_btn text-center">
+                            <button type="submit" class="boxed-btn4">Donate Now</button>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
         </div>
+    </div>
     {% endif %}
     <!-- similar projects  -->
     {% if similar_projects %}
-        <div class="reson_area section_padding">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-6">
-                        <div class="section_title text-center mb-55">
-                            <h3><span>Similar Projects</span></h3>
+    <div class="reson_area section_padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title text-center mb-55">
+                        <h3><span>Similar Projects</span></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                {% for proj in similar_projects %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_reson">
+                        <div class="thum">
+                            <div class="thum_1">
+                                <img src="/media/{{ proj.images.first }}" width="266px" height="388px" alt="">
+                            </div>
+                        </div>
+                        <div class="help_content similar_content">
+                            <h4>{{ proj.title }}</h4>
+                            <p>{{ proj.desc|truncatewords:20 }}</p>
+                            <a href="{% url " projects.show" proj.slug %}" class="read_more">Read More</a>
                         </div>
                     </div>
                 </div>
-                <div class="row justify-content-center">
-                    {% for proj in similar_projects %}
-                        <div class="col-lg-4 col-md-6">
-                            <div class="single_reson">
-                                <div class="thum">
-                                    <div class="thum_1">
-                                        <img src="/media/{{ proj.images.first }}" width="266px" height="388px" alt="">
-                                    </div>
-                                </div>
-                                <div class="help_content similar_content">
-                                    <h4>{{ proj.title }}</h4>
-                                    <p>{{ proj.desc|truncatewords:20 }}</p>
-                                    <a href="{% url "projects.show" proj.slug %}" class="read_more">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
+                {% endfor %}
             </div>
         </div>
+    </div>
     {% endif %}
     <!-- similar projects end  -->
 
@@ -217,9 +245,9 @@
             </div>
         </div>
     </div>
-{% endblock %}
+    {% endblock %}
 
-{% block scripts %}
+    {% block scripts %}
     <script src="/static/projects/js/comments.js"></script>
     <script src="/static/projects/js/sweetalert2.min.js"></script>
     <script>
@@ -257,21 +285,21 @@
             $("#reportModal").find("#report_type").val(report_type);
             $("#reportModal").modal()
         });
-            $(document).on("click", "#cancel_project", function (e) {
-                e.preventDefault();
-                Swal.fire({
-                    title: 'Are you sure to cancel this project?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, do it!'
-                }).then((result) => {
-                    if (result.value) {
-                        location.href = "{% url 'projects.cancel' project.slug %}";
-                    }
-                })
-            });
+        $(document).on("click", "#cancel_project", function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Are you sure to cancel this project?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, do it!'
+            }).then((result) => {
+                if (result.value) {
+                    location.href = "{% url 'projects.cancel' project.slug %}";
+                }
+            })
+        });
     </script>
-{% endblock %}
+    {% endblock %}

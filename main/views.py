@@ -1,9 +1,13 @@
 from django.shortcuts import render
 from django.db.models import Q
 from projects.models import Project, Category
-
+from django.http import HttpResponse
+from decimal import Decimal
+from django.http import JsonResponse
 
 # Create your views here.
+
+
 
 def index(req):
     selectedProjects = Project.objects.filter(active=True, enable=True)[:6]
@@ -11,15 +15,25 @@ def index(req):
 
     top_rated = Project.objects.filter(ratings__isnull=False).order_by('ratings__average')[:5]
     categories = Category.objects.all()
-    print(categories.count())
+    counter = 0
+    custom_categories = []
+    row = []
+    for category in categories:
+        print(counter)
+        row.append(category)
+        counter += 1
+        if counter % 4 == 0 or categories.count() == counter:
+            custom_categories.append(row)
+            row = []
 
+    print(custom_categories)
     context = {
-        "selectedProjects": selectedProjects,
-        "latestProjects": latestProjects,
-        'top_rated': top_rated,
-        'categories': categories,
+            "selectedProjects": selectedProjects,
+            "latestProjects": latestProjects,
+            'top_rated': top_rated,
+            'categories': custom_categories,
 
-    }
+        }
 
     return render(req, "main/index.html", {"context": context})
 

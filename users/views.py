@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from projects.models import Image, Project, Comment, Donation
 from users.models import Account
 from .forms import UserRegisterationForm
+from django.contrib import messages
 
 
 # Create your views here.
@@ -29,4 +30,14 @@ def profile(request):
     context['email'] = request.user
     return render(request, "users/profile.html", context)
 
+
+@login_required
+def delete_profile(request):
+
+    if request.method == "GET":
+        print("User deleted")
+        request.user.delete()
+        messages.success(request , "You just deleted your account successfully ..")
+
+    return redirect("/")
 

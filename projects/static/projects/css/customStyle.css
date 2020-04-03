@@ -1,3 +1,20 @@
+.img_size{
+  height: 600px;
+}
+.carousel-item{
+	height: 600px;
+}
+.slide{
+	width: 100%;
+	margin: 0px !important;
+	padding: 0px !important;
+}
+.thumb{
+    width: 100%;
+}
+.single_cause{
+    width: 100%;
+}
 .cus_img {
     width: 250px;
     margin-left: 12px;
@@ -48,6 +65,7 @@
     margin-right: 2px;
     text-decoration: none;
 }
+
 
 .extra_tags a:hover {
     background-color: #226d4d;

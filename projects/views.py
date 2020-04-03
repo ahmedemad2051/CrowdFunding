@@ -10,6 +10,7 @@ from django.db.models import Sum
 from decimal import Decimal
 from django.http import JsonResponse
 from django.template.loader import render_to_string
+from django.db.models import Q
 
 
 # Create your views here.
@@ -17,6 +18,15 @@ from django.template.loader import render_to_string
 def index(req):
     context = {}
     projects = Project.objects.filter(enable=True)
+    if 'category' in req.GET:
+        category = req.GET.get('category')
+        context['category'] = category
+        projects = projects.filter(category__name=category)
+    if 'q' in req.GET:
+        search = req.GET.get('q')
+        context['q'] = search
+        projects = projects.filter(Q(title__icontains=search) | Q(tags__name__icontains=search))
+
     context['projects'] = projects
     return render(req, "projects/index.html", context)
 
@@ -29,10 +39,12 @@ def show(req, project_slug):
     comments = project.comments.filter(parent__active__isnull=True)
     similar_projects = Project.objects.filter(tags__in=project.tags.all()).exclude(id=project.id)
     comment_form = CommentForm()
+    images = project.images.all()
     context['project'] = project
     context['similar_projects'] = similar_projects
     context['comments'] = comments
     context['comment_form'] = comment_form
+    context['images'] = images
     return render(req, "projects/show.html", context)
 
 

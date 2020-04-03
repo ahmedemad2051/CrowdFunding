@@ -6,22 +6,41 @@ Register Now
 {% endblock %}
 
 
+{% block styles %}
+<link rel="stylesheet" href="/static/authenticate/css/register.css">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Baloo+Thambi+2:600&display=swap" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
 <div class="container">
     <form method="POST">
         {% csrf_token %}
         <fieldset>
-            <legend>Sign Up</legend>
+            <legend>
+                <br>
+                <i class="fa fa-user-plus"></i>
+                <b class="register_bold">Register</b>
+            </legend>
             {{ form|crispy }}
         </fieldset>
         <div>
-            <button type="submit">Sign Up</button>
+            <button type="submit" class="btn btn-primary sign_up_button">
+                <i class="fa fa-user-plus"></i>
+                Sign Up
+            </button>
         </div>
     </form>
 
     <div>
         <small>
-            Already Have An Account? <a href="#">Sign In</a>
+            Already Have An Account? <br> <a href="{{ authenticate.views.login }}">
+                <span>
+                    <i class="fa fa-sign-in"></i>
+                </span>
+                Sign In
+            </a>
         </small>
     </div>
 </div>
