@@ -1,0 +1,11 @@
+*{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.sign_up_button{
+    background-color: #1FCBAA ;
+    border-style: none;
+}
+.register_bold{
+    color: black !important;
+}
