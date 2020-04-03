@@ -22,10 +22,10 @@ def index(req):
         category = req.GET.get('category')
         context['category'] = category
         projects = projects.filter(category__name=category)
-    if 'search' in req.GET:
+    if 'q' in req.GET:
         search = req.GET.get('q')
         context['q'] = search
-        projects = projects.filter(Q(title__icontains=search) | Q(tags__icontains=search))
+        projects = projects.filter(Q(title__icontains=search) | Q(tags__name__icontains=search))
 
     context['projects'] = projects
     return render(req, "projects/index.html", context)
