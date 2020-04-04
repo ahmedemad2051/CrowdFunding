@@ -49,10 +49,10 @@ class Account(AbstractBaseUser):
     last_name = models.CharField(max_length=30)
     mobile = models.CharField(max_length=20)
     profile_picture = models.ImageField()
-    facebook = models.URLField(max_length=200)
-    instagram = models.URLField(max_length=200)
-    twitter = models.URLField(max_length=200)
-    public_info = models.TextField()
+    facebook = models.URLField(max_length=200, null=True)
+    instagram = models.URLField(max_length=200, null=True)
+    twitter = models.URLField(max_length=200, null=True)
+    public_info = models.TextField(null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
