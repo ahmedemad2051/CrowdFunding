@@ -1,0 +1,18 @@
+version: '3'
+services:
+  crowdfunding:
+    build: .
+    ports:
+    - 90:8000        
+    depends_on:
+      - mysql_host
+
+  mysql_host:
+    image: mysql:5.7
+    environment:
+        - MYSQL_DATABASE=crowd_funding
+        - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - mysqlvol:/var/lib/mysql
+volumes:
+  mysqlvol: {}

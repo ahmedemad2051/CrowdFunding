@@ -113,7 +113,7 @@ DATABASES = {
         'NAME': 'crowd_funding',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': '127.0.0.1',
+        'HOST': 'mysql_host',
         'PORT': '3306'
     }
 }
