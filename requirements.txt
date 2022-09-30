@@ -17,7 +17,7 @@ django-tempus-dominus==5.1.2.13
 grpcio==1.16.1
 grpcio-tools==1.16.1
 idna==2.9
-joblib==0.14.1
+joblib==1.2.0
 mysql-connector==2.2.9
 mysqlclient==1.4.6
 numpy==1.18.2
